@@ -3,6 +3,7 @@
 
 from flask import Flask
 
+from echis_web.commands import login_command
 from echis_web.controllers.auth_controller import auth
 from echis_web.extensions import me
 
@@ -20,9 +21,16 @@ def create_app(env):
 
     load_extensions(app)
     app.register_blueprint(auth)
+    load_commands(app)
 
     return app
 
 
 def load_extensions(app):
     me.init_app(app)
+
+
+def load_commands(app):
+    app.cli.add_command(login_command)
+
+

@@ -24,4 +24,4 @@ class TestConfig:
 
         app = create_app("prod")
 
-        assert "MONGO_URL" in app.config
+        assert "MONGO_URL" in app.config.keys()
