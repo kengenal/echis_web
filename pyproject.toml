@@ -1,0 +1,19 @@
+[tool.poetry]
+name = "echis_web2"
+version = "0.1.0"
+description = ""
+authors = ["kengenal <kengenal1@gmail.com>"]
+
+[tool.poetry.dependencies]
+python = "^3.8"
+Flask = "^1.1.2"
+flask-mongoengine = "^1.0.0"
+
+[tool.poetry.dev-dependencies]
+pytest = "^6.1.2"
+factory_boy = "3.1.0"
+mongomock = "^3.21.0"
+
+[build-system]
+requires = ["poetry-core>=1.0.0"]
+build-backend = "poetry.core.masonry.api"
