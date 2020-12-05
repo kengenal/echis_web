@@ -12,7 +12,7 @@ def create_app(env):
     if env == "prod":
         object_name = "echis_web.settings.ProdConfig"
     elif env == "test":
-        object_name = "echis_web.settings.ProdConfig"
+        object_name = "echis_web.settings.TestConfig"
     else:
         object_name = "echis_web.settings.DevConfig"
 
