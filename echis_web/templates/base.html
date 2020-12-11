@@ -2,9 +2,67 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>{% block title %}{% endblock %}</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/bootstrap.min.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='mdb.min.css') }}">
+
 </head>
 <body>
+<nav class="navbar navbar-expand-lg navbar-light bg-dark">
+    <ul class="navbar-nav mr-auto">
+        <a class="navbar-brand text-white" href="{{ url_for('home.index') }}">
+            <img src="https://cdn.discordapp.com/widget-avatars/EK8101DeRW0t0Jeze4L3YapbumoaRLCDWs5bV9Ntqf0/O7VJsYBxprw5iDc2BUlaItDtc-whuW9HwNy8Jm9qH-eal5gw3LhlSfTeOOqcpH0_JJSCgLWwyP9v-Nei_8kvTW-bohSs7JnQyfoUI_-q7osntUmM2H4LsFUPHOma1TCW2VNZqoG0x8xhmA"
+                 width="40" height="40" alt="echis" class="rounded-circle">
+        </a>
+    </ul>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav mr-auto">
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle text-light" href="#" id="navbarDropdown" role="button"
+                   data-toggle="dropdown"
+                   aria-haspopup="true" aria-expanded="false">
+                    Share
+                </a>
+                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                    <a class="dropdown-item" href="#">Playlists</a>
+                    <a class="dropdown-item " href="#">Songs</a>
+                </div>
+            </li>
+        </ul>
+        <div class="form-inline my-2 my-lg-0">
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle text-light" id="navbarDropdownMenuLink-55" data-toggle="dropdown"
+                   aria-haspopup="true" aria-expanded="false" role="button">
+                    <img width="30" height="30" src="{{ user['avatar'] }}" class="rounded-circle z-depth-0"
+                         alt="avatar image"> {{ user['username'] }}
+                </a>
+                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                    {#                    <a class="dropdown-item" href="{% url 'share:playlists' %}">Profile</a>#}
+                    <a class="dropdown-item " href="{{ url_for('auth.logout') }}">Logout</a>
+                </div>
+            </li>
+        </div>
+    </div>
+</nav>
+<!-- Navbar -->
 
+<main class="container-fluid p-5 mt-5 mb-5" style="min-height: 85vh">
+    {% block content %}
+
+    {% endblock %}
+</main>
+
+<footer class="page-footer font-small special-color-dark pt-4 bg-dark text-light">
+    <div class="footer-copyright text-center py-3">© {% now 'Y' %} Copyright:
+        <a href="https://mdbootstrap.com/">{{ request.get_host }}</a>
+    </div>
+</footer>
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
+        integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
+        crossorigin="anonymous"></script>
+<script src="{{ url_for('static', filename='mdb.min.css') }}" type="application/javascript"></script>
 </body>
 </html>

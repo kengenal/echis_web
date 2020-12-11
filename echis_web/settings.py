@@ -3,8 +3,9 @@ import os
 
 class Config(object):
     SECRET_KEY = "secret key"
-    TOKEN_SECRET = os.getenv("TOKEN_SECRET", default="SAdasdasd")
-    TOKEN_ALGORITHM = os.getenv("TOKEN_ALGORITHM", default="HS512")
+    TOKEN_SECRET = os.getenv("TOKEN_SECRET", default="asdasdasd")
+    TOKEN_ALGORITHM = os.getenv("TOKEN_ALGORITHM", default="HS256")
+    SESSION_TYPE = "filesystem"
 
 
 class ProdConfig(Config):
@@ -20,8 +21,8 @@ class DevConfig(Config):
     DEBUG = True
 
     MONGODB_SETTINGS = {
-        "db": "project1",
-        "host": "mongodb://localhost/database_name"
+        "db": "mongoenginetest",
+        "host": "mongomock://localhost"
     }
 
     CACHE_TYPE = "null"

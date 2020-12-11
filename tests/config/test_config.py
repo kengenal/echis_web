@@ -10,7 +10,7 @@ class TestConfig:
         app = create_app("dev")
 
         assert app.config['DEBUG'] is True
-        assert "MONGO_URL" in app.config
+        assert "MONGODB_SETTINGS" in app.config.keys()
 
     def test_test_config(self):
         """ Tests if the test config loads correctly """
@@ -24,4 +24,4 @@ class TestConfig:
 
         app = create_app("prod")
 
-        assert "MONGO_URL" in app.config.keys()
+        assert "MONGODB_SETTINGS" in app.config.keys()
