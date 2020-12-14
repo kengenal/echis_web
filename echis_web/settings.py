@@ -1,4 +1,5 @@
 import os
+from pathlib import Path
 
 
 class Config(object):
@@ -6,6 +7,8 @@ class Config(object):
     TOKEN_SECRET = os.getenv("TOKEN_SECRET", default="asdasdasd")
     TOKEN_ALGORITHM = os.getenv("TOKEN_ALGORITHM", default="HS256")
     SESSION_TYPE = "filesystem"
+    BASE_DIR = Path(__file__).resolve(strict=True).parent.parent.parent
+    SESSION_FILE_DIR = os.path.join(BASE_DIR, "sessions")
 
 
 class ProdConfig(Config):

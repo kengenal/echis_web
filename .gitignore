@@ -311,3 +311,4 @@ fabric.properties
 # profiling data
 
 # End of https://www.toptal.com/developers/gitignore/api/python,pycharm,flask
+flask_session

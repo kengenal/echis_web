@@ -6,7 +6,7 @@ from flask import Flask
 from echis_web.commands import login_command
 from echis_web.controllers.auth_controller import auth
 from echis_web.controllers.home_controller import home
-from echis_web.extensions import me, session
+from echis_web.extensions import me, sess
 
 
 def create_app(env="dev"):
@@ -30,7 +30,7 @@ def create_app(env="dev"):
 
 def load_extensions(app):
     me.init_app(app)
-    session.init_app(app)
+    sess.init_app(app)
 
 
 def load_commands(app):

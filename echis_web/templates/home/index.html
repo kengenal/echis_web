@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+
+{% block title %}Echis - home{% endblock %}
+
+{% block content %}
+    <div class="container">
+        <h1 class="display-1 text-center p-5">Welcome {{ session['user']['username'] }}</h1>
+        <div class="row text-center p-5">
+            <div class="col-6 ">
+                <a href="#" class="btn btn-success btn-lg btn-block">Playlists</a>
+            </div>
+            <div class="col-6">
+                <a href="#" class="btn btn-primary btn-lg btn-block">Songs</a>
+            </div>
+        </div>
+    </div>
+{% endblock %}

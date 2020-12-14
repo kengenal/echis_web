@@ -1,4 +1,4 @@
-from flask import Blueprint, current_app, abort, redirect, url_for
+from flask import Blueprint, current_app, abort, redirect, url_for, session, flash
 
 from echis_web.extensions import sess
 from echis_web.forms.auth_form import AuthForm
@@ -16,7 +16,7 @@ def login(token: str):
         })
         form = AuthForm(data=decode)
         if form.validate():
-            sess["user"] = decode
+            session["user"] = decode
             return redirect(url_for("home.index"))
         abort(404)
     except Exception:
@@ -26,6 +26,7 @@ def login(token: str):
 @auth.route("/logout")
 def logout():
     # remove the username from the session if it's there
-    sess.pop("user", None)
+    session.pop("user", None)
+    flash("Your session has been destroy", "success")
     abort(404)
 
