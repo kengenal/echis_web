@@ -25,7 +25,7 @@
     <option name="TEMPLATE_CONFIGURATION" value="Jinja2" />
     <option name="TEMPLATE_FOLDERS">
       <list>
-        <option value="$MODULE_DIR$/echis_web2/templates" />
+        <option value="$MODULE_DIR$/echis_web/templates" />
       </list>
     </option>
   </component>

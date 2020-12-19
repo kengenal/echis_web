@@ -1,0 +1,13 @@
+
+
+{% macro render_field(field) %}
+    {{ field.label }}
+    {{ field(class="form-control" + (" is-invalid" if field.errors else "") + " rounded-0 shadow-none", **{"placeholder": "Playlist_id"}) }}
+    {% if field.errors %}
+        <ul class="errors alert-danger">
+            {% for error in field.errors %}
+                <li>{{ error }}</li>
+            {% endfor %}
+        </ul>
+    {% endif %}
+{% endmacro %}

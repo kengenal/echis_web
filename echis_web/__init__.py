@@ -1,28 +1,35 @@
 #! ../env/bin/python
 # -*- coding: utf-8 -*-
+import os
 
+import click
 from flask import Flask
+from flask_mongoengine import MongoEngineSessionInterface
 
-from echis_web.commands import login_command
 from echis_web.controllers.auth_controller import auth
 from echis_web.controllers.home_controller import home
-from echis_web.extensions import me, sess
+from echis_web.controllers.share_controller import share
+from echis_web.extensions import me
+from echis_web.settings import ProdConfig, DevConfig
+from echis_web.utils.token import create_token
 
 
-def create_app(env="dev"):
+def create_app(env):
     app = Flask(__name__)
+
+    object_name = "echis_web.settings.DevConfig"
     if env == "production":
         object_name = "echis_web.settings.ProdConfig"
     elif env == "test":
         object_name = "echis_web.settings.TestConfig"
-    else:
-        object_name = "echis_web.settings.DevConfig"
 
     app.config.from_object(object_name)
 
     load_extensions(app)
+    app.session_interface = MongoEngineSessionInterface(me)
     app.register_blueprint(auth)
     app.register_blueprint(home)
+    app.register_blueprint(share)
     load_commands(app)
 
     return app
@@ -30,9 +37,29 @@ def create_app(env="dev"):
 
 def load_extensions(app):
     me.init_app(app)
-    sess.init_app(app)
 
 
 def load_commands(app):
     app.cli.add_command(login_command)
 
+
+@click.command("login")
+def login_command():
+    """ create token to login with dami data """
+    if os.getenv("FLASK_ENV") == "prod":
+        config = ProdConfig()
+    else:
+        config = DevConfig()
+    prepare_data = {
+        "permissions": "ADMIN|USER",
+        "username": "TestName",
+        "discord_id": 13456,
+        "avatar": "https://cdn.discordapp.com/widget-avatars/EK8101DeRW0t0Jeze4L3YapbumoaRLCDWs5bV9Ntqf0"
+                  "/O7VJsYBxprw5iDc2BUlaItDtc-whuW9HwNy8Jm9qH-eal5gw3LhlSfTeOOqcpH0_JJSCgLWwyP9v-Nei_8kvTW"
+                  "-bohSs7JnQyfoUI_-q7osntUmM2H4LsFUPHOma1TCW2VNZqoG0x8xhmA",
+    }
+    token = create_token(data=prepare_data, options={
+        "TOKEN_SECRET": config.TOKEN_SECRET,
+        "TOKEN_ALGORITHM": config.TOKEN_ALGORITHM
+    })
+    click.echo(f"http://localhost:5000/auth/{token}")

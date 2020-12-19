@@ -6,9 +6,6 @@ class Config(object):
     SECRET_KEY = "secret key"
     TOKEN_SECRET = os.getenv("TOKEN_SECRET", default="asdasdasd")
     TOKEN_ALGORITHM = os.getenv("TOKEN_ALGORITHM", default="HS256")
-    SESSION_TYPE = "filesystem"
-    BASE_DIR = Path(__file__).resolve(strict=True).parent.parent.parent
-    SESSION_FILE_DIR = os.path.join(BASE_DIR, "sessions")
 
 
 class ProdConfig(Config):
@@ -24,12 +21,9 @@ class DevConfig(Config):
     DEBUG = True
 
     MONGODB_SETTINGS = {
-        "db": "mongoenginetest",
-        "host": "mongomock://localhost"
+        "db": "admin",
+        "host": "mongodb://root:example@localhost:27017/admin"
     }
-
-    CACHE_TYPE = "null"
-    ASSETS_DEBUG = True
 
 
 class TestConfig(Config):

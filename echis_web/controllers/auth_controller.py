@@ -1,6 +1,5 @@
 from flask import Blueprint, current_app, abort, redirect, url_for, session, flash
 
-from echis_web.extensions import sess
 from echis_web.forms.auth_form import AuthForm
 from echis_web.utils.token import decode_token
 

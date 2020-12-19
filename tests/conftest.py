@@ -1,6 +1,7 @@
 import pytest
 
 from echis_web import create_app
+from tests.fatories import PlaylistsFactory
 
 
 @pytest.fixture()
@@ -30,3 +31,8 @@ def empty_session(client):
     with client as c:
         with c.session_transaction() as sess:
             sess["u"] = {}
+
+
+@pytest.fixture()
+def playlists():
+    return PlaylistsFactory()

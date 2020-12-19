@@ -1,0 +1,32 @@
+{#{% extends 'base.html' %}#}
+{% from "macros/render_form.html" import render_field %}
+
+{% block  title %}new{% endblock %}
+
+{% block content %}
+    <div class="d-flex justify-content-center">
+        <div class="card mx-xl-5 row " style="width: 40rem">
+            <div class="card-body">
+                <p class="h4 text-center py-4 card-header">Add new playlist</p>
+                <form method="POST">
+                    <div class="pt-3">
+                        {{ form.csrf_token }}
+                        <div class="form-group">
+                            {{ render_field(form.playlist_id) }}
+                        </div>
+                        <div class="form-group">
+                           {{ render_field(form.api) }}
+                        </div>
+                        <div class="form-group">
+                            {{ render_field(form.is_active) }}
+                        </div>
+                        <div class="text-center py-4 mt-3 form-group">
+                            <button class="btn btn-success" type="submit">Create<i
+                                    class="fa fa-paper-plane-o ml-2"></i></button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+{% endblock %}
