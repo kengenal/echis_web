@@ -1,18 +1,37 @@
+import random
 import uuid
-from datetime import datetime
 
 import factory
 
-from echis_web.model.share_model import Playlists
-from factory import Faker, LazyFunction, lazy_attribute
+from echis_web.model.share_model import Playlists, SharedSongs
+from factory import Faker
 
 
 class PlaylistsFactory(factory.mongoengine.MongoEngineFactory):
     class Meta:
         model = Playlists
 
-    record_id = str(uuid.uuid4())
-    playlist_id = str(uuid.uuid4())
+    record_id = factory.Sequence(lambda n: uuid.uuid4())
+    playlist_id = factory.Sequence(lambda n: str(uuid.uuid4()))
     user = Faker("name")
     api = "deezer"
     is_active = True
+
+
+class SongsFactory(factory.mongoengine.MongoEngineFactory):
+    class Meta:
+        model = SharedSongs
+
+    record_id = factory.Sequence(lambda n: uuid.uuid4())
+    playlist_id = factory.Sequence(lambda n: str(uuid.uuid4()))
+    added_by = Faker("name")
+    rank = random.randint(0, 100)
+    song_id = str(uuid.uuid4())
+    artist = Faker("name")
+    album = Faker("name")
+    added_to_playlist = str(uuid.uuid4())
+    api = "deezer"
+    is_shared = False
+    cover = str(uuid.uuid4())
+    title = Faker("name")
+

@@ -1,7 +1,7 @@
 import pytest
 
 from echis_web import create_app
-from tests.fatories import PlaylistsFactory
+from tests.fatories import PlaylistsFactory, SongsFactory
 
 
 @pytest.fixture()
@@ -36,3 +36,8 @@ def empty_session(client):
 @pytest.fixture()
 def playlists():
     return PlaylistsFactory()
+
+
+@pytest.fixture()
+def songs():
+    return SongsFactory()

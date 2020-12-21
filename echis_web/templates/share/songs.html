@@ -2,49 +2,44 @@
 {% from 'macros/pagination.html' import pagination %}
 {% from 'macros/flash.html' import flash %}
 
-{% block title %}Playlists{% endblock %}
+{% block title %}Songs{% endblock %}
 
 {% block content %}
     <div>
-        <div class="row">
-            <h2 class="text-left col-6">playlists</h2>
-            <div class="col-6 text-right">
-                <a href="{{ url_for("share.create_playlist") }}"
-                   class="btn-floating btn-lg col-6 btn-default">
-                    <svg width="3em" height="3em" viewBox="0 0 16 16" class="bi bi-plus-circle-fill" fill="currentColor"
-                         xmlns="http://www.w3.org/2000/svg">
-                        <path fill-rule="evenodd"
-                              d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM8.5 4.5a.5.5 0 0 0-1 0v3h-3a.5.5 0 0 0 0 1h3v3a.5.5 0 0 0 1 0v-3h3a.5.5 0 0 0 0-1h-3v-3z"/>
-                    </svg>
-                </a>
-            </div>
-        </div>
+        <h2 class="text-center">Songs</h2>
         {{ flash }}
         <table class="table table-striped mr-auto ml-auto">
             <thead class="bg-dark text-light">
             <tr>
                 <th scope="col">#</th>
-                <th scope="col">Playlist ID</th>
-                <th scope="col">User</th>
-                <th scope="col">Service</th>
+                <th scope="col">Cover</th>
+                <th scope="col">rank</th>
+                <th scope="col">title</th>
+                <th scope="col">album</th>
+                <th scope="col">playlist id</th>
                 <th scope="col">Added</th>
-                <th scope="col">Active</th>
+                <th scope="col">Added by</th>
+                <th scope="col">Source</th>
+                <th scope="col">Send</th>
                 {% if 'ADMIN' in session['user']['permissions'] %}
-                    <th scope="col">Edit</th>
                     <th scope="col">Delete</th>
                 {% endif %}
             </tr>
             </thead>
             <tbody>
-            {% for data in playlists.items %}
+            {% for data in songs.items %}
                 <tr>
                     <th scope="row">{{ loop.index }}</th>
+                    <th><img src="{{ data.cover }}" alt="{{ data.title }}" width="100" height="100"></th>
+                    <th>{{ data.rank }}</th>
+                    <th>{{ data.title }}</th>
+                    <th>{{ data.album }}</th>
                     <th>{{ data.playlist_id }}</th>
-                    <th>{{ data.user }}</th>
+                    <th>{{ data.added_to_playlist }}</th>
+                    <th>{{ data.added_by }}</th>
                     <th>{{ data.api }}</th>
-                    <th>{{ data.created_at }}</th>
                     <th>
-                        {% if data.is_active %}
+                        {% if data.is_shared %}
                             <h2 class="text-success">
                                 <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-check-square-fill"
                                      fill="currentColor"
@@ -64,9 +59,8 @@
                         {% endif %}
                     </th>
                     {% if 'ADMIN' in session['user']['permissions'] %}
-                        <th><a class="btn btn-primary" href="{{ url_for('share.edit_playlist', playlist_id=data.playlist_id) }}">Edit</a></th>
                         <th>
-                            <form action="{{ url_for('share.delete_playlist', playlist_id=data.playlist_id) }}" method="POST">
+                            <form action="{{ url_for('share.delete_song', record_id=data.record_id) }}" method="POST">
                                 <button type="submit" class="btn btn-danger">
                                     <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-trash-fill"
                                          fill="currentColor" xmlns="http://www.w3.org/2000/svg">
@@ -81,6 +75,6 @@
             {% endfor %}
             </tbody>
         </table>
-        {{ pagination(playlists, 'share.get_playlists') }}
+        {{ pagination(songs, 'share.get_songs') }}
     </div>
 {% endblock %}

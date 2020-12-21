@@ -1,8 +1,6 @@
 import uuid
 from datetime import datetime
 
-from wtforms import SelectField
-
 from echis_web.extensions import me
 
 

@@ -1,6 +1,6 @@
 import uuid
 
-from echis_web.model.share_model import Playlists
+from echis_web.model.share_model import Playlists, SharedSongs
 
 
 class TestPlaylist:
@@ -78,3 +78,28 @@ class TestPlaylist:
 
         assert rq.status_code == 404
 
+
+class TestSongs:
+    URL = "/share/songs"
+
+    def test_get_should_be_return_200_and_list_of_playlist(self, client, login, songs):
+        rq = client.get(self.URL)
+
+        assert rq.status_code == 200
+
+    def test_get_with_paginate_page_does_not_exists(self, client, login, songs):
+        rq = client.get(f"{self.URL}?page=6")
+
+        assert rq.status_code == 404
+
+    def test_delete_songs_should_be_redirect(self, login, client, songs):
+        rq = client.get(f"{self.URL}/{songs.record_id}/delete")
+        get = SharedSongs.objects(record_id=songs.record_id)
+
+        assert rq.status_code == 302
+        assert len(get) == 0
+
+    def test_delete_songs_return_404(self, login, client):
+        rq = client.get(f"{self.URL}/random/delete")
+
+        assert rq.status_code == 404

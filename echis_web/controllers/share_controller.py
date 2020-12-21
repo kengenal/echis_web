@@ -1,7 +1,7 @@
 from flask import Blueprint, request, render_template, session, redirect, url_for, flash
 from flask_mongoengine.wtf import model_form
 
-from echis_web.model.share_model import Playlists
+from echis_web.model.share_model import Playlists, SharedSongs
 from echis_web.utils.decorators import login_required, has_perms
 
 share = Blueprint("share", __name__, url_prefix="/share")
@@ -29,19 +29,20 @@ def create_playlist():
     return render_template("share/new.html", form=form)
 
 
-@share.route("playlists/<string:pl_id>/edit", methods=["POST", "GET"])
+@share.route("playlists/<string:playlist_id>/edit", methods=["POST", "GET"])
 @login_required
 @has_perms("ADMIN", rd="share.get_playlists")
-def edit_playlist(pl_id):
-    playlist = Playlists.objects.get_or_404(playlist_id=pl_id)
+def edit_playlist(playlist_id):
+    playlist = Playlists.objects.get_or_404(playlist_id=playlist_id)
     playlist_form = model_form(Playlists)
     form = playlist_form(request.form)
     if request.method == "POST" and form.validate():
-        pl = form.data.get("playlist_id", playlist.playlist_id)
-        playlist.playlist_id = pl
-        playlist.api = form.data.get("api", playlist.api)
-        playlist.is_active = form.data.get("is_active", playlist.is_active)
-        playlist.save()
+        pl = form.data.get("playlist_id", playlist.playlist_id, )
+        playlist.update(
+            set__playlist_id=pl,
+            set__api=form.data.get("api", playlist.api),
+            set__is_active=form.data.get("is_active", playlist.is_active)
+        )
         flash(f"Playlist {pl} has been updated", "success")
         return redirect(url_for("share.get_playlists"))
     return render_template("share/edit_playlist.html", form=form, playlist=playlist)
@@ -56,3 +57,23 @@ def delete_playlist(playlist_id):
     flash("Playlist has been removed", "success")
 
     return redirect(url_for("share.get_playlists"))
+
+
+@share.route("/songs", methods=["GET"])
+@login_required
+def get_songs():
+    page = request.args.get("page", 1)
+    songs = SharedSongs.objects.paginate(page=int(page), per_page=1)
+
+    return render_template("share/songs.html", songs=songs)
+
+
+@share.route("songs/<uuid:record_id>/delete", methods=["GET"])
+@login_required
+@has_perms("ADMIN", rd="share.get_songs")
+def delete_song(record_id):
+    songs = SharedSongs.objects.get_or_404(record_id=record_id)
+    songs.delete()
+    flash("Song has been removed", "success")
+
+    return redirect(url_for("share.get_songs"))
