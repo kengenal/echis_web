@@ -1,8 +1,8 @@
 
 
-{% macro render_field(field) %}
+{% macro render_field(field, value='') %}
     {{ field.label }}
-    {{ field(class="form-control" + (" is-invalid" if field.errors else "") + " rounded-0 shadow-none", **{"placeholder": "Playlist_id"}) }}
+    {{ field(class="form-control" + (" is-invalid" if field.errors else "") + " rounded-0 shadow-none", **{"placeholder": "Playlist_id", "value": value}) }}
     {% if field.errors %}
         <ul class="errors alert-danger">
             {% for error in field.errors %}

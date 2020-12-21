@@ -14,5 +14,5 @@ class PlaylistsFactory(factory.mongoengine.MongoEngineFactory):
     record_id = str(uuid.uuid4())
     playlist_id = str(uuid.uuid4())
     user = Faker("name")
-    api = Faker("name")
+    api = "deezer"
     is_active = True
