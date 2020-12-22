@@ -6,12 +6,12 @@ class Config(object):
     SECRET_KEY = os.getenv("SECRET_KEY", default="secret key")
     TOKEN_SECRET = os.getenv("TOKEN_SECRET", default="asdasdasd")
     TOKEN_ALGORITHM = os.getenv("TOKEN_ALGORITHM", default="HS256")
+    PAGINATION = 10
 
 
 class ProdConfig(Config):
     ENV = "prod"
     MONGODB_SETTINGS = {
-        "db": os.getenv("MONGO_DB"),
         "host": os.getenv("MONGO_URL")
     }
 

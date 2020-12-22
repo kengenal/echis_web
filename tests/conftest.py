@@ -1,3 +1,5 @@
+import os
+
 import pytest
 
 from echis_web import create_app
@@ -6,7 +8,7 @@ from tests.fatories import PlaylistsFactory, SongsFactory
 
 @pytest.fixture()
 def client():
-    app = create_app("test")
+    app = create_app()
     client = app.test_client()
 
     return client

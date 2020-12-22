@@ -1,27 +1,30 @@
-{#{% extends 'base.html' %}#}
+{% extends 'base.html' %}
 {% from "macros/render_form.html" import render_field %}
 
 {% block  title %}Edit{% endblock %}
 
 {% block content %}
     <div class="d-flex justify-content-center">
+      <div class="card-header">
+                <a class="btn btn-success" href="{{ url_for('share.get_playlists') }}"></a>
+            </div>
         <div class="card mx-xl-5 row " style="width: 40rem">
             <div class="card-body">
                 <p class="h4 text-center py-4 card-header">Edit playlist</p>
                 <form method="POST">
                     <div class="pt-3">
                         {{ form.csrf_token }}
-                        <div class="form-group">
+                        <div class="mb-3 form-check">
                             {{ render_field(form.playlist_id, playlist.playlist_id) }}
                         </div>
-                        <div class="form-group">
-                           {{ render_field(form.api, playlist.api) }}
+                        <div class="mb-3 form-check">
+                           {{ render_field(form.api, playlist.api, css_class="form-select") }}
                         </div>
-                        <div class="form-group">
-                            {{ render_field(form.is_active, playlist.is_active) }}
+                        <div class="form-check mb-3 ml-4">
+                            {{ render_field(form.is_active, playlist.is_active, css_class="form-check-input") }}
                         </div>
-                        <div class="text-center py-4 mt-3 form-group">
-                            <button class="btn btn-success" type="submit">Create<i
+                        <div class="text-center py-4 mt-3 form-check">
+                            <button class="btn btn-success" type="submit">Save<i
                                     class="fa fa-paper-plane-o ml-2"></i></button>
                         </div>
                     </div>

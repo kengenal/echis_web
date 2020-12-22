@@ -25,8 +25,8 @@
                     Share
                 </a>
                 <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                    <a class="dropdown-item" href="#">Playlists</a>
-                    <a class="dropdown-item " href="#">Songs</a>
+                    <a class="dropdown-item" href="{{ url_for('share.get_playlists') }}">Playlists</a>
+                    <a class="dropdown-item " href="{{ url_for('share.get_songs') }}">Songs</a>
                 </div>
             </li>
         </ul>
@@ -44,17 +44,14 @@
         </div>
     </div>
 </nav>
-<!-- Navbar -->
 
 <main class="container-fluid p-5 mt-5 mb-5" style="min-height: 85vh">
-    {% block content %}
-
-    {% endblock %}
+    {% block content %}{% endblock %}
 </main>
 
 <footer class="page-footer font-small special-color-dark pt-4 bg-dark text-light">
     <div class="footer-copyright text-center py-3">© 2020 Copyright:
-        <a href="https://mdbootstrap.com/">{{ request.get_host }}</a>
+        <a href="https://mdbootstrap.com/" class="text-white">{{ request.host_url }}</a>
     </div>
 </footer>
 <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"

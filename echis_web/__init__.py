@@ -3,7 +3,7 @@
 import os
 
 import click
-from flask import Flask
+from flask import Flask, render_template
 from flask_mongoengine import MongoEngineSessionInterface
 
 from echis_web.controllers.auth_controller import auth
@@ -14,9 +14,9 @@ from echis_web.settings import ProdConfig, DevConfig
 from echis_web.utils.token import create_token
 
 
-def create_app(env):
+def create_app():
     app = Flask(__name__)
-
+    env = os.getenv("FLASK_ENV", default="develop")
     object_name = "echis_web.settings.DevConfig"
     if env == "production":
         object_name = "echis_web.settings.ProdConfig"
@@ -26,6 +26,9 @@ def create_app(env):
     app.config.from_object(object_name)
 
     load_extensions(app)
+    app.register_error_handler(404, page_not_found)
+    app.register_error_handler(500, page_not_found)
+
     app.session_interface = MongoEngineSessionInterface(me)
     app.register_blueprint(auth)
     app.register_blueprint(home)
@@ -37,6 +40,10 @@ def create_app(env):
 
 def load_extensions(app):
     me.init_app(app)
+
+
+def page_not_found(e):
+    return render_template('404.html'), 404
 
 
 def load_commands(app):

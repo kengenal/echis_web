@@ -22,7 +22,7 @@ class SharedSongs(me.Document):
 
 class Playlists(me.Document):
     record_id = me.UUIDField(default=uuid.uuid4(), unique=True)
-    playlist_id = me.StringField(required=True, max_length=50)
+    playlist_id = me.StringField(required=True, max_length=50, unique=True)
     user = me.StringField()
     api = me.StringField(required=True, choices=[("deezer", "deezer"), ("spotify", "spotify")])
     is_active = me.BooleanField(default=True)

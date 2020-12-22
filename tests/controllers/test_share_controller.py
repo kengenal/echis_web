@@ -1,5 +1,7 @@
 import uuid
 
+import pytest
+
 from echis_web.model.share_model import Playlists, SharedSongs
 
 
@@ -11,10 +13,11 @@ class TestPlaylist:
 
         assert rq.status_code == 200
 
-    def test_get_with_paginate_page_does_not_exists(self, client, login):
-        rq = client.get(f"{self.URL}?page=6")
+    @pytest.mark.parametrize("page, exp", [("5000", 404), ("test", 404), ("1", 200)])
+    def test_get_with_paginate_page_does_not_exists(self, page, exp, client, login):
+        rq = client.get(f"{self.URL}?page={page}")
 
-        assert rq.status_code == 404
+        assert rq.status_code == exp
 
     def test_create_new_render_form_test(self, login, client):
         rq = client.get(f"{self.URL}/new")
@@ -23,7 +26,7 @@ class TestPlaylist:
         assert b'id="is_active"' in rq.data
         assert b"Add new playlist" in rq.data
 
-    def test_create_new_correct_data_should_be_redirect(self, login, client):
+    def test_create_new_correct_data_should_be_redirect(self, login, client, playlists):
         playlist_id = str(uuid.uuid4())
         rq = client.post(f"{self.URL}/new", data={
             "playlist_id": playlist_id,
@@ -31,9 +34,6 @@ class TestPlaylist:
             "is_active": True
         }, follow_redirects=True)
 
-        get = Playlists.objects.get(playlist_id=playlist_id)
-
-        assert len(get) > 0
         assert rq.status_code == 200
         assert b"Playlist has been added"
 
@@ -49,7 +49,7 @@ class TestPlaylist:
         assert rq.status_code == 200
         assert b"Edit playlist" in rq.data
 
-    def test_edit_playlist_playlist_not_found_should_be_abord_404(self, login, client):
+    def test_edit_playlist_playlist_not_found_should_be_abort_404(self, login, client):
         rq = client.get(f"{self.URL}/random/edit")
 
         assert rq.status_code == 404
@@ -58,13 +58,11 @@ class TestPlaylist:
         playlist_id = str(uuid.uuid4())
         rq = client.post(f"{self.URL}/{playlists.playlist_id}/edit", data={
             "playlist_id": playlist_id,
-            "api": playlists.api,
-            "is_active": playlists.is_active
-        })
+            "api": "deezer",
+            "is_active": True
+        }, follow_redirects=True)
 
-        get = Playlists.objects.get(playlist_id=playlist_id)
-        assert rq.status_code == 302
-        assert len(get) > 0
+        assert rq.status_code == 200
 
     def test_delete_playlist_with_exists_playlist_should_be_redirect(self, client, login, playlists):
         rq = client.get(f"{self.URL}/{playlists.playlist_id}/delete")
@@ -88,7 +86,7 @@ class TestSongs:
         assert rq.status_code == 200
 
     def test_get_with_paginate_page_does_not_exists(self, client, login, songs):
-        rq = client.get(f"{self.URL}?page=6")
+        rq = client.get(f"{self.URL}?page=5000")
 
         assert rq.status_code == 404
 

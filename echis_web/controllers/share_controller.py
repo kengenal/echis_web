@@ -1,4 +1,4 @@
-from flask import Blueprint, request, render_template, session, redirect, url_for, flash
+from flask import Blueprint, request, render_template, session, redirect, url_for, flash, current_app, abort
 from flask_mongoengine.wtf import model_form
 
 from echis_web.model.share_model import Playlists, SharedSongs
@@ -10,10 +10,12 @@ share = Blueprint("share", __name__, url_prefix="/share")
 @share.route("/playlists", methods=["GET"])
 @login_required
 def get_playlists():
-    page = request.args.get("page", 1)
-    playlists = Playlists.objects.paginate(page=int(page), per_page=1)
-
-    return render_template("share/playlists.html", playlists=playlists)
+    try:
+        page = request.args.get("page", 1)
+        playlists = Playlists.objects.paginate(page=int(page), per_page=current_app.config["PAGINATION"])
+        return render_template("share/playlists.html", playlists=playlists)
+    except:
+        abort(404)
 
 
 @share.route("/playlists/new", methods=["POST", "GET"])
@@ -23,8 +25,14 @@ def create_playlist():
     playlist_form = model_form(Playlists)
     form = playlist_form(request.form)
     if request.method == "POST" and form.validate():
-        form.user = session["user"]["username"]
-        form.save()
+        playlist = Playlists(
+            user=session["user"]["username"],
+            playlist_id=form.playlist_id.data,
+            api=form.api.data,
+            is_active=form.is_active.data
+        )
+        playlist.save()
+        flash("Playlist has been added", "success")
         return redirect(url_for("share.get_playlists"))
     return render_template("share/new.html", form=form)
 
@@ -37,12 +45,11 @@ def edit_playlist(playlist_id):
     playlist_form = model_form(Playlists)
     form = playlist_form(request.form)
     if request.method == "POST" and form.validate():
-        pl = form.data.get("playlist_id", playlist.playlist_id, )
-        playlist.update(
-            set__playlist_id=pl,
-            set__api=form.data.get("api", playlist.api),
-            set__is_active=form.data.get("is_active", playlist.is_active)
-        )
+        pl = form.playlist_id.data
+        playlist.playlist_id = str(pl)
+        playlist.api = form.api.data
+        playlist.is_active = form.is_active.data
+        playlist.save()
         flash(f"Playlist {pl} has been updated", "success")
         return redirect(url_for("share.get_playlists"))
     return render_template("share/edit_playlist.html", form=form, playlist=playlist)
@@ -63,7 +70,7 @@ def delete_playlist(playlist_id):
 @login_required
 def get_songs():
     page = request.args.get("page", 1)
-    songs = SharedSongs.objects.paginate(page=int(page), per_page=1)
+    songs = SharedSongs.objects.paginate(page=int(page), per_page=current_app.config["PAGINATION"])
 
     return render_template("share/songs.html", songs=songs)
 
