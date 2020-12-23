@@ -1,5 +1,4 @@
 import pytest
-from flask import current_app
 
 from echis_web.utils.token import create_token, decode_token
 

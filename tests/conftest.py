@@ -8,6 +8,7 @@ from tests.fatories import PlaylistsFactory, SongsFactory
 
 @pytest.fixture()
 def client():
+    os.environ["FLASK_ENV"] = "test"
     app = create_app()
     client = app.test_client()
 

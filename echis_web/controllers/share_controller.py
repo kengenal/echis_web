@@ -14,7 +14,7 @@ def get_playlists():
         page = request.args.get("page", 1)
         playlists = Playlists.objects.paginate(page=int(page), per_page=current_app.config["PAGINATION"])
         return render_template("share/playlists.html", playlists=playlists)
-    except:
+    except Exception:
         abort(404)
 
 

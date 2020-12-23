@@ -1,8 +1,9 @@
 from unittest.mock import patch
 
+import pytest
+
 from echis_web.utils import decorators
 from echis_web.utils.decorators import login_required, has_perms, unauthorized
-import pytest
 
 SESSION_PATH = "echis_web.utils.decorators.session"
 
@@ -24,7 +25,7 @@ def abort(monkeypatch):
 
 class TestLoginRequired:
     def test_login_required_should_be_return_404(self, abort):
-        with patch(SESSION_PATH, dict()) as session:
+        with patch(SESSION_PATH, dict()):
             dec = login_required(lambda x: x)(1)
 
             assert dec == 404
@@ -77,6 +78,7 @@ class TestHasPerms:
 
             assert dec == 302
 
+
 # Test Unauthorized
 
 class TestUnauthorized:
@@ -89,7 +91,7 @@ class TestUnauthorized:
             assert dec == 404
 
     def test_user_not_authorized_should_be_return_function_body(self):
-        with patch(SESSION_PATH, dict()) as session:
+        with patch(SESSION_PATH, dict()):
             dec = unauthorized(lambda x: x)(1)
 
             assert dec == 1

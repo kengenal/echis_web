@@ -1,6 +1,3 @@
-from echis_web.utils.decorators import login_required
-
-
 class TestHomeController:
     def test_index_controller(self, client, login):
         rq = client.get("/home")
