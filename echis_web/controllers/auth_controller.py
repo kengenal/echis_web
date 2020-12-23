@@ -28,4 +28,3 @@ def logout():
     session.pop("user", None)
     flash("Your session has been destroy", "success")
     abort(404)
-

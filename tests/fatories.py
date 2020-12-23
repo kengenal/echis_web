@@ -2,9 +2,9 @@ import random
 import uuid
 
 import factory
+from factory import Faker
 
 from echis_web.model.share_model import Playlists, SharedSongs
-from factory import Faker
 
 
 class PlaylistsFactory(factory.mongoengine.MongoEngineFactory):
@@ -34,4 +34,3 @@ class SongsFactory(factory.mongoengine.MongoEngineFactory):
     is_shared = False
     cover = str(uuid.uuid4())
     title = Faker("name")
-

@@ -1,4 +1,5 @@
 from functools import wraps
+
 from flask import session, abort, redirect, url_for
 
 
@@ -32,8 +33,8 @@ def has_perms(perms, rd=None):
         @wraps(func)
         def wrapper_func(*args, **kwargs):
             if user := session.get("user", None):
-                p = user.get("permissions", None)
-                if not perms or perms not in p.split("|"):
+                p = user.get("permissions", None).upper()
+                if not perms or perms.upper() not in p.split("|"):
                     return get_redirect(rd) if rd else get_404()
             else:
                 return get_404()
