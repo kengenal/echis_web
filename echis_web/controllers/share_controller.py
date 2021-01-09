@@ -6,6 +6,12 @@ from echis_web.utils.decorators import login_required, has_perms
 
 share = Blueprint("share", __name__, url_prefix="/share")
 
+FIELDS_ARGS = {
+    'playlist_id': {'label': "Playlist id"},
+    "api": {'label': "Select Api"},
+    "is_active": {'label': "active"},
+}
+
 
 @share.route("/playlists", methods=["GET"])
 @login_required
@@ -22,7 +28,7 @@ def get_playlists():
 @login_required
 @has_perms("ADMIN", rd="share.get_playlists")
 def create_playlist():
-    playlist_form = model_form(Playlists)
+    playlist_form = model_form(Playlists, field_args=FIELDS_ARGS)
     form = playlist_form(request.form)
     if request.method == "POST" and form.validate():
         playlist = Playlists(
@@ -42,8 +48,8 @@ def create_playlist():
 @has_perms("ADMIN", rd="share.get_playlists")
 def edit_playlist(playlist_id):
     playlist = Playlists.objects.get_or_404(playlist_id=playlist_id)
-    playlist_form = model_form(Playlists)
-    form = playlist_form(request.form)
+    playlist_form = model_form(Playlists, field_args=FIELDS_ARGS)
+    form = playlist_form(obj=playlist)
     if request.method == "POST" and form.validate():
         pl = form.playlist_id.data
         playlist.playlist_id = str(pl)
@@ -52,7 +58,7 @@ def edit_playlist(playlist_id):
         playlist.save()
         flash(f"Playlist {pl} has been updated", "success")
         return redirect(url_for("share.get_playlists"))
-    return render_template("share/edit_playlist.html", form=form, playlist=playlist)
+    return render_template("share/edit_playlist.html", form=form)
 
 
 @share.route("playlists/<string:playlist_id>/delete", methods=["GET"])
