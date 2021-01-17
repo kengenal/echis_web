@@ -21,7 +21,7 @@ class DevConfig(Config):
 
     MONGODB_SETTINGS = {
         "db": "admin",
-        "host": "mongodb://root:example@localhost:27017/admin"
+        "host": "mongodb://root:example@mongo:27017/admin"
     }
 
 
