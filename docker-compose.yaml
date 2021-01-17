@@ -18,3 +18,24 @@ services:
     environment:
       ME_CONFIG_MONGODB_ADMINUSERNAME: root
       ME_CONFIG_MONGODB_ADMINPASSWORD: example
+
+
+
+  python:
+    container_name: python
+    hostname: python
+    build:
+      dockerfile: ./build/python/Dockerfile
+      context: .
+    environment:
+      FLASK_APP: main.py
+      FLASK_DEBUG: 1
+      FLASK_ENV: develop
+      DJANGO_SECRET_KEY: sadasfdsadasd
+      MONGO_URL: mongodb://root:example@mongo:27017/discord
+      TOKEN_ALGORITHM: HS512
+      TOKEN_SECRET: asmklasfhiudhfiu
+    ports:
+      - 5000:5000
+    volumes:
+      - ./:/app
