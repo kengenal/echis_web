@@ -36,7 +36,7 @@ services:
     labels:
       - "traefik.enable=true"
       - "traefik.http.routers.python.rule=Host(`discord.docker.localhost`) && PathPrefix(`/api`)"
-      - "traefik.http.services.node.loadbalancer.server.port=5000"
+      - "traefik.http.services.python.loadbalancer.server.port=5000"
     volumes:
       - ./:/app
 
