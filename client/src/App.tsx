@@ -7,8 +7,8 @@ import "./index.scss";
 export default function App() {
   return (
     <>
-      <Router />
       <Navigation />
+      <Router />
     </>
   );
 }
