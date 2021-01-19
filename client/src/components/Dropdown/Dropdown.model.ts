@@ -1,7 +1,8 @@
 export interface DropdownList {
   header: {
-    label: string;
-    icon: string;
+    label?: string;
+    icon?: string;
+    image?: string;
   };
   items: {
     label: string;

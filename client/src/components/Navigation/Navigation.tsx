@@ -6,7 +6,7 @@ import "./Navigation.scss";
 import Dropdown from "../Dropdown/Dropdown";
 
 export default function Navigation() {
-  const dropdown = {
+  const dropdownShare = {
     header: {
       label: "Share",
       icon: "share",
@@ -15,6 +15,14 @@ export default function Navigation() {
       { link: "/share/playlist", label: "Playlist", icon: "queue_music" },
       { link: "/share/songs", label: "Songs", icon: "music_note" },
     ],
+  };
+
+  const dropdownAccound = {
+    header: {
+      image:
+        "https://cdn.discordapp.com/avatars/301796703277940737/c88c68adcb5b04db54ee1a8eb6081fc0.webp?size=1024",
+    },
+    items: [{ link: "/account/logout", label: "Logout", icon: "exit_to_app" }],
   };
 
   return (
@@ -28,42 +36,15 @@ export default function Navigation() {
           />
         </Link>
 
+        <ul className="navbar__list mr-auto">
+          <li className="navbar__list-item">
+            <Dropdown dropdown={dropdownShare} />
+          </li>
+        </ul>
         <ul className="navbar__list">
           <li className="navbar__list-item">
-            <Dropdown dropdown={dropdown} />
+            <Dropdown dropdown={dropdownAccound} />
           </li>
-          {/* <ul className="navbar-nav ">
-            <li className="nav-item">
-              <a className="nav-link" href="sda">
-                <i className="fa fa-bell">
-                  <span className="badge badge-info">11</span>
-                </i>
-                Test
-              </a>
-            </li>
-            <li className="nav-item">
-              <a className="nav-link" href="dasd">
-                <i className="fa fa-globe">
-                  <span className="badge badge-success">11</span>
-                </i>
-                Test
-              </a>
-            </li>
-          </ul> */}
-          {/* <form className="form-inline my-2 my-lg-0">
-            <input
-              className="form-control mr-sm-2"
-              type="text"
-              placeholder="Search"
-              aria-label="Search"
-            />
-            <button
-              className="btn btn-outline-success my-2 my-sm-0"
-              type="submit"
-            >
-              Search
-            </button>
-          </form> */}
         </ul>
       </nav>
     </Router>
