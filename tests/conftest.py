@@ -3,7 +3,7 @@ import os
 import pytest
 
 from echis_web import create_app
-from tests.fatories import PlaylistsFactory, SongsFactory
+from tests.fatories import PlaylistsFactory, SongsFactory, UserFactory
 
 
 @pytest.fixture()
@@ -44,3 +44,8 @@ def playlists():
 @pytest.fixture()
 def songs():
     return SongsFactory()
+
+
+@pytest.fixture()
+def user():
+    return UserFactory()

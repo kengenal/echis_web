@@ -5,6 +5,7 @@ import factory
 from factory import Faker
 
 from echis_web.model.share_model import Playlists, SharedSongs
+from echis_web.model.user_model import User
 
 
 class PlaylistsFactory(factory.mongoengine.MongoEngineFactory):
@@ -34,3 +35,16 @@ class SongsFactory(factory.mongoengine.MongoEngineFactory):
     is_shared = False
     cover = str(uuid.uuid4())
     title = Faker("name")
+
+
+class UserFactory(factory.mongoengine.MongoEngineFactory):
+    class Meta:
+        model = User
+
+    discord_id = random.randint(0, 100)
+    username = Faker("name")
+    avatar = "https://cdn.discordapp.com/widget-avatars" \
+             "/EK8101DeRW0t0Jeze4L3YapbumoaRLCDWs5bV9Ntqf0O7VJsYBxprw5iDc2BUlaItDtc-whuW9HwNy8Jm9qH" \
+             "-eal5gw3LhlSfTeOOqcpH0_JJSCgLWwyP9v-Nei_8kvTW-bohSs7JnQyfoUI_-q7osntUmM2H4LsFUPHOma1TCW2VNZqoG0x8xhmA "
+
+    permissions = ["ADMIN"]
