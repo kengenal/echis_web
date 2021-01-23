@@ -41,10 +41,12 @@ class UserFactory(factory.mongoengine.MongoEngineFactory):
     class Meta:
         model = User
 
+    public_id = factory.Sequence(lambda n: uuid.uuid4())
     discord_id = random.randint(0, 100)
     username = Faker("name")
-    avatar = "https://cdn.discordapp.com/widget-avatars" \
-             "/EK8101DeRW0t0Jeze4L3YapbumoaRLCDWs5bV9Ntqf0O7VJsYBxprw5iDc2BUlaItDtc-whuW9HwNy8Jm9qH" \
-             "-eal5gw3LhlSfTeOOqcpH0_JJSCgLWwyP9v-Nei_8kvTW-bohSs7JnQyfoUI_-q7osntUmM2H4LsFUPHOma1TCW2VNZqoG0x8xhmA "
+    avatar = factory.Sequence(
+        lambda n: "https://cdn.discordapp.com/widget-avatars/72hdNk-aQzhCtMttVXuS3jdY2bGCKRIWZ0qcuBwtf0Q" \
+                  "/cB7zPbxBXEZH_H0solsOPkwLo27UKXyj5mwQrVfBcTKea" \
+                  "-cwgvqwoA5lHC2cQ5ISonuVK7KXjmWYRYjusSp2g4HVqiCWpjhE3Qp0OoXXCN5VnLh7PEjajbpS74Ez428mIX9dPJ6azi37sw")
 
     permissions = ["ADMIN"]

@@ -1,6 +1,11 @@
 from functools import wraps
 
-from flask import session, abort, redirect, url_for
+import jwt
+from flask import session, abort, redirect, url_for, request, g
+
+from echis_web.exception.exceptions import UnauthorizedException
+from echis_web.model.user_model import User
+from echis_web.utils.token import decode_token
 
 
 def get_404():
@@ -50,6 +55,24 @@ def unauthorized(func):
     def wrapper_func(*args, **kwargs):
         if "user" in session:
             return get_404()
+        return func(*args, **kwargs)
+
+    return wrapper_func
+
+
+def login_required_api(func):
+    """ if user not exist in session raise 404 """
+
+    @wraps(func)
+    def wrapper_func(*args, **kwargs):
+        if token := request.headers.get("Authorization", None):
+            clear_token = token.replace("Barer", "").strip()
+            try:
+                token_decode = decode_token(clear_token)
+                get_user = User.get_user_or_rise_exception(public_id=token_decode.get("public_id", None))
+                g["user"] = get_user
+            except jwt.PyJWTError:
+                raise UnauthorizedException()
         return func(*args, **kwargs)
 
     return wrapper_func

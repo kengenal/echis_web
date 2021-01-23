@@ -3,12 +3,13 @@
 import os
 
 import click
-from flask import Flask, render_template
+from flask import Flask, render_template, jsonify
 from flask_mongoengine import MongoEngineSessionInterface
 
 from echis_web.controllers.auth_controller import auth
 from echis_web.controllers.home_controller import home
 from echis_web.controllers.share_controller import share
+from echis_web.exception.exceptions import HttpBaseException
 from echis_web.extensions import me
 from echis_web.settings import ProdConfig, DevConfig
 from echis_web.utils.token import create_token
@@ -33,9 +34,16 @@ def create_app():
     app.register_blueprint(auth)
     app.register_blueprint(home)
     app.register_blueprint(share)
+    app.register_error_handler(HttpBaseException, handle_invalid_usage)
     load_commands(app)
 
     return app
+
+
+def handle_invalid_usage(error):
+    response = jsonify(error.to_dict())
+    response.status_code = error.status_code
+    return response
 
 
 def load_extensions(app):

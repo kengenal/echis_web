@@ -1,6 +1,8 @@
 import os
+from unittest.mock import patch
 
 import pytest
+from flask import g
 
 from echis_web import create_app
 from tests.fatories import PlaylistsFactory, SongsFactory, UserFactory
@@ -27,6 +29,14 @@ def login(client):
                           "/O7VJsYBxprw5iDc2BUlaItDtc-whuW9HwNy8Jm9qH-eal5gw3LhlSfTeOOqcpH0_JJSCgLWwyP9v-Nei_8kvTW"
                           "-bohSs7JnQyfoUI_-q7osntUmM2H4LsFUPHOma1TCW2VNZqoG0x8xhmA",
             }
+
+
+@pytest.fixture()
+def api_login(client, user):
+    def mock(*args, **kwargs):
+        g.user = user
+
+    patch("echis_web.utils.decorator.login_required", mock).start()
 
 
 @pytest.fixture()
