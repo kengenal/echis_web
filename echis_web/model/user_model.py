@@ -7,7 +7,7 @@ from echis_web.extensions import me
 class User(me.Document):
     public_id = me.UUIDField(default=uuid.uuid4())
     discord_id = me.IntField(required=True)
-    username = me.StringField(reqired=True)
+    username = me.StringField(reqired=True, min_length=4)
     avatar = me.URLField(required=True)
     permissions = me.ListField()
 
