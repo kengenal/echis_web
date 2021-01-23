@@ -3,7 +3,7 @@ from functools import wraps
 import jwt
 from flask import session, abort, redirect, url_for, request, g
 
-from echis_web.exception.exceptions import UnauthorizedException
+from echis_web.exception.exceptions import UnauthorizedException, ForbiddenException
 from echis_web.model.user_model import User
 from echis_web.utils.token import decode_token
 
@@ -76,3 +76,22 @@ def login_required_api(func):
         return func(*args, **kwargs)
 
     return wrapper_func
+
+
+def has_perm_api(permissions=None):
+    """ Check user permissions if user don't have permission raise ForbiddenException """
+    if permissions is None:
+        permissions = []
+
+    def decorator(func):
+        @wraps(func)
+        def wrapper_func(*args, **kwargs):
+            user = g.get("user")
+            perms = [x for x in permissions if user.has_perm(x) is True]
+            if len(perms) == 0:
+                raise ForbiddenException()
+            return func(*args, **kwargs)
+
+        return wrapper_func
+
+    return decorator

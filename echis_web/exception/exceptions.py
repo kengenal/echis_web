@@ -13,3 +13,8 @@ class HttpBaseException(Exception):
 class UnauthorizedException(HttpBaseException):
     status_code = 401
     message = "User not exists"
+
+
+class ForbiddenException(HttpBaseException):
+    status_code = 403
+    message = "You don't has permission"

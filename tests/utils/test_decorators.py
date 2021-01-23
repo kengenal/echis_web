@@ -3,9 +3,15 @@ from uuid import uuid4
 
 import pytest
 
-from echis_web.exception.exceptions import UnauthorizedException
+from echis_web.exception.exceptions import UnauthorizedException, ForbiddenException
 from echis_web.utils import decorators
-from echis_web.utils.decorators import login_required, has_perms, unauthorized, login_required_api
+from echis_web.utils.decorators import (
+    login_required,
+    has_perms,
+    unauthorized,
+    login_required_api,
+    has_perm_api
+)
 from echis_web.utils.token import create_token
 
 SESSION_PATH = "echis_web.utils.decorators.session"
@@ -132,4 +138,24 @@ class TestUnauthorized:
 
 
 class TestHasPermission:
-    pass
+    def test_user_has_permission(self, client, user):
+        with patch(G_OBJECT_PATH, dict()) as g:
+            @has_perm_api(["admin"])
+            def t():
+                return 1
+
+            g["user"] = user
+
+            dec = t()
+            assert dec == 1
+
+    def test_user_dont_have_permission_should_be_raise_exception(self, client, user):
+        with pytest.raises(ForbiddenException) as err:
+            with patch(G_OBJECT_PATH, dict()) as g:
+                @has_perm_api(["random_permission"])
+                def t():
+                    return 1
+
+                g["user"] = user
+                t()
+                assert err.status_code == 403
