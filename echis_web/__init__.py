@@ -15,7 +15,7 @@ from echis_web.utils.token import create_token
 
 
 def create_app():
-    app = Flask(__name__)
+    app = Flask(__name__, static_url_path="/webstatic")
     env = os.getenv("FLASK_ENV", default="develop")
     object_name = "echis_web.settings.DevConfig"
     if env == "production":
@@ -69,4 +69,4 @@ def login_command():
         "TOKEN_SECRET": config.TOKEN_SECRET,
         "TOKEN_ALGORITHM": config.TOKEN_ALGORITHM
     })
-    click.echo(f"http://localhost:5000/auth/{token}")
+    click.echo(f"http://discord.docker.localhost:5000/api/auth/{token}")

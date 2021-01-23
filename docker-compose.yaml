@@ -19,8 +19,6 @@ services:
       ME_CONFIG_MONGODB_ADMINUSERNAME: root
       ME_CONFIG_MONGODB_ADMINPASSWORD: example
 
-
-
   python:
     container_name: python
     hostname: python
@@ -32,10 +30,40 @@ services:
       FLASK_DEBUG: 1
       FLASK_ENV: develop
       DJANGO_SECRET_KEY: sadasfdsadasd
-      MONGO_URL: mongodb://root:example@mongo:27017/discord
+      MONGO_URL: mongodb://root:example@mongo:27017/admin
       TOKEN_ALGORITHM: HS512
       TOKEN_SECRET: asmklasfhiudhfiu
-    ports:
-      - 5000:5000
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.python.rule=Host(`discord.docker.localhost`) && PathPrefix(`/api`)"
+      - "traefik.http.services.python.loadbalancer.server.port=5000"
     volumes:
       - ./:/app
+
+  node:
+    working_dir: /app-client
+    container_name: node
+    command: npm run start
+    build:
+      context: .
+      dockerfile: ./build/node/Dockerfile
+    environment:
+      - NODE_ENV=development
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.node.rule=Host(`discord.docker.localhost`)"
+      - "traefik.http.services.node.loadbalancer.server.port=4200"
+    volumes:
+      - ./client:/app-client
+      - /app-client/node_modules
+
+  proxy:
+    image: traefik:v2.2
+    container_name: proxy
+    command: --api.insecure=true --providers.docker
+    ports:
+      - "80:80"
+      - "5000:8080"
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+
