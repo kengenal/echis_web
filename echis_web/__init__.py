@@ -3,12 +3,14 @@
 import os
 
 import click
-from flask import Flask, render_template
+from flask import Flask, render_template, jsonify
 from flask_mongoengine import MongoEngineSessionInterface
 
+from echis_web.controllers.api.api_auth_controller import ApiAuthController, ApiLogoutController
 from echis_web.controllers.auth_controller import auth
 from echis_web.controllers.home_controller import home
 from echis_web.controllers.share_controller import share
+from echis_web.exception.exceptions import ForbiddenException, UnauthorizedException, BadRequestException
 from echis_web.extensions import me
 from echis_web.settings import ProdConfig, DevConfig
 from echis_web.utils.token import create_token
@@ -33,9 +35,23 @@ def create_app():
     app.register_blueprint(auth)
     app.register_blueprint(home)
     app.register_blueprint(share)
+    route(app)
+    register_exceptions(app)
     load_commands(app)
 
     return app
+
+
+def register_exceptions(app):
+    app.register_error_handler(UnauthorizedException, handle_invalid_usage)
+    app.register_error_handler(ForbiddenException, handle_invalid_usage)
+    app.register_error_handler(BadRequestException, handle_invalid_usage)
+
+
+def handle_invalid_usage(error):
+    response = jsonify(error.to_dict())
+    response.status_code = error.status_code
+    return response
 
 
 def load_extensions(app):
@@ -48,6 +64,11 @@ def page_not_found(e):
 
 def load_commands(app):
     app.cli.add_command(login_command)
+
+
+def route(app):
+    app.add_url_rule("/api/auth", view_func=ApiAuthController.as_view("api_auth"))
+    app.add_url_rule("/api/logout", view_func=ApiLogoutController.as_view("api_logout"))
 
 
 @click.command("login")
