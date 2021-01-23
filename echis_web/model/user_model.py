@@ -14,5 +14,11 @@ class User(me.Document):
     @staticmethod
     def get_user_or_rise_exception(public_id):
         if user := User.objects(public_id=public_id):
-            return user
+            return user.get()
         raise UnauthorizedException()
+
+    def has_perm(self, perm):
+        p = perm.upper()
+        if p in self.permissions:
+            return True
+        return False
