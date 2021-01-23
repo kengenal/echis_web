@@ -8,11 +8,14 @@ from echis_web.model.user_model import User
 from echis_web.utils.token import decode_token, create_token
 
 
-def dec(token):
-    return decode_token(token=token, options={
-        "TOKEN_SECRET": current_app.config["TOKEN_SECRET"],
-        "TOKEN_ALGORITHM": current_app.config["TOKEN_ALGORITHM"]
-    })
+def dec():
+    return decode_token(
+        token=request.headers.get("Authorization", "").replace("Barer", "").strip(),
+        options={
+            "TOKEN_SECRET": current_app.config["TOKEN_SECRET"],
+            "TOKEN_ALGORITHM": current_app.config["TOKEN_ALGORITHM"]
+        }
+    )
 
 
 def create(public_id):
@@ -30,7 +33,7 @@ class ApiAuthController(MethodView):
     @staticmethod
     def get():
         try:
-            decode = dec(token=request.headers.get("Authorization", "").replace("Barer", "").strip())
+            decode = dec()
             payload = decode
             decode.pop("exp")
             payload["permissions"] = decode.get("permissions", "").upper().strip().split("|")
@@ -43,5 +46,17 @@ class ApiAuthController(MethodView):
             return jsonify(end_data), 200
         except ValidationError as err:
             raise BadRequestException(err.to_dict())
+        except PyJWTError:
+            raise BadRequestException({"Error": "Bad token"})
+
+
+class ApiLogoutController(MethodView):
+    @staticmethod
+    def get():
+        try:
+            decode = dec()
+            user = User.objects.get_or_404(public_id=decode.get("public_id", None))
+            user.delete()
+            return jsonify({"Success": "user has been removed"}), 204
         except PyJWTError:
             raise BadRequestException({"Error": "Bad token"})

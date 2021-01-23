@@ -19,6 +19,11 @@ def client():
 
 
 @pytest.fixture()
+def user():
+    return UserFactory()
+
+
+@pytest.fixture()
 def login(client):
     with client as c:
         with c.session_transaction() as sess:
@@ -43,6 +48,15 @@ def token():
                   "-bohSs7JnQyfoUI_-q7osntUmM2H4LsFUPHOma1TCW2VNZqoG0x8xhmA",
     }
     token = create_token(data=prepare_data)
+    return token
+
+
+@pytest.fixture
+def login_token(user):
+    payload = {
+        "public_id": str(user.public_id)
+    }
+    token = create_token(data=payload)
     return token
 
 
@@ -79,8 +93,3 @@ def playlists():
 @pytest.fixture()
 def songs():
     return SongsFactory()
-
-
-@pytest.fixture()
-def user():
-    return UserFactory()
