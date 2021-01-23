@@ -1,12 +1,28 @@
-.container {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  margin: 5rem;
+@import "../../style/global.scss";
 
+.card {
   &__header {
-    font-weight: 300;
-    line-height: 1.2;
-    font-size: 3em;
+    text-align: center;
+  }
+
+  &__list {
+    list-style: none;
+  }
+
+  &__list-item {
+    margin-top: 10px;
+    border-top: 1px solid $primary-color;
+    padding-top: 10px;
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+
+    &:hover {
+      color: $primary-color;
+    }
+  }
+
+  &__list-label {
+    padding: 0.5rem;
   }
 }

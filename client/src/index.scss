@@ -1,6 +1,22 @@
-body {
+html,
+body,
+div,
+table,
+caption,
+tbody,
+tfoot,
+thead,
+tr,
+th,
+td {
   margin: 0;
   padding: 0;
+  border: 0;
+  font-size: 100%;
+  font: inherit;
+  table-layout: fixed;
+  border-spacing: inherit;
+  vertical-align: baseline;
   font-family: "Roboto", "Arial", sans-serif;
 }
 
@@ -10,4 +26,18 @@ img {
 
 .mr-auto {
   margin-right: auto;
+}
+
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 4rem;
+  min-height: 50vh;
+
+  &__header {
+    font-weight: 300;
+    line-height: 1.2;
+    font-size: 5rem;
+  }
 }

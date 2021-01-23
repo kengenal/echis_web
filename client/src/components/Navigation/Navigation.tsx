@@ -1,4 +1,4 @@
-import { BrowserRouter as Router, Link } from "react-router-dom";
+import { BrowserRouter } from "react-router-dom";
 import React from "react";
 
 import "./Navigation.scss";
@@ -26,15 +26,15 @@ export default function Navigation() {
   };
 
   return (
-    <Router>
+    <BrowserRouter>
       <nav className="navbar">
-        <Link className="navbar__brand" to="/">
+        <a className="navbar__brand" href="/">
           <img
             className="navbar__image"
             alt="back to home page"
             src="https://cdn.discordapp.com/widget-avatars/EK8101DeRW0t0Jeze4L3YapbumoaRLCDWs5bV9Ntqf0/O7VJsYBxprw5iDc2BUlaItDtc-whuW9HwNy8Jm9qH-eal5gw3LhlSfTeOOqcpH0_JJSCgLWwyP9v-Nei_8kvTW-bohSs7JnQyfoUI_-q7osntUmM2H4LsFUPHOma1TCW2VNZqoG0x8xhmA"
           />
-        </Link>
+        </a>
 
         <ul className="navbar__list mr-auto">
           <li className="navbar__list-item">
@@ -47,6 +47,6 @@ export default function Navigation() {
           </li>
         </ul>
       </nav>
-    </Router>
+    </BrowserRouter>
   );
 }
