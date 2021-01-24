@@ -18,7 +18,8 @@ class ApiPlaylistController(MethodView):
             return jsonify(res={
                 "results": playlists.total,
                 "page": page,
-                "playlists": playlists.items
+                "playlists": playlists.items,
+                "api_available": ["spotify", "deezer", "youtube"]
             })
         except Exception:
             raise NotFoundException()
@@ -36,7 +37,17 @@ class ApiPlaylistController(MethodView):
 
     @staticmethod
     def put(playlist_id):
-        pass
+        try:
+            rq = request.get_json()
+            playlist = Playlists.objects.get_or_404(playlist_id=playlist_id)
+            playlist.update(
+                set__playlist_id=rq.get("playlist_id"),
+                set__api=rq.get("api"),
+                set__is_active=rq.get("is_active"),
+            )
+            return jsonify(playlist.to_json())
+        except ValidationError as err:
+            raise BadRequestException(err.to_dict())
 
     @staticmethod
     def delete(playlist_id):

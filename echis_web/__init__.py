@@ -81,6 +81,11 @@ def route(app):
         view_func=ApiPlaylistController.as_view("share_playlist"),
         methods=["GET", "POST"]
     )
+    app.add_url_rule(
+        "/api/share/playlist/<playlist_id>",
+        view_func=ApiPlaylistController.as_view("share_playlist_parameter"),
+        methods=["PUT", "DELETE"]
+    )
 
 
 @click.command("login")

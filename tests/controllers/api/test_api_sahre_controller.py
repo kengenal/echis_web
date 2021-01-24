@@ -37,3 +37,20 @@ class TestApiController:
         rq = client.post("/api/share/playlist", json=payload, headers=login_token_header)
 
         assert rq.status_code == 400
+
+    def test_update_playlist_should_be_return_200(self, client, login_token_header, playlists):
+        payload = {
+            "playlist_id": str(uuid.uuid4()),
+            "api": "spotify",
+            "is_active": False
+        }
+
+        rq = client.put(f"/api/share/playlist/{str(playlists.playlist_id)}", json=payload, headers=login_token_header)
+
+        assert rq.status_code == 200
+        assert b"playlist_id"
+
+    def test_update_without_data_should_be_return_400(self, client, login_token_header, playlists):
+        rq = client.put(f"/api/share/playlist/{playlists.playlist_id}", json={}, headers=login_token_header)
+
+        assert rq.status_code == 400
