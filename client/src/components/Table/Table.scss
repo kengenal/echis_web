@@ -1,0 +1,26 @@
+@import "../../style/global.scss";
+
+.table {
+  max-width: 80%;
+
+  &__head {
+    border: 0 solid;
+    border-color: inherit;
+    background-color: $primary-color;
+  }
+
+  &__row {
+    background-color: rgba(0, 0, 0, 0.05);
+  }
+
+  &__cell,
+  &__header {
+    text-align: center;
+    padding: 15px;
+  }
+
+  &__header {
+    color: $text-font-color;
+    font-weight: 600;
+  }
+}
