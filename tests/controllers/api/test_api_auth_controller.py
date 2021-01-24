@@ -21,8 +21,8 @@ class TestApiAuthController:
 
 
 class TestApiLogoutController:
-    def test_correct_token_should_be_remove_user_and_return_204(self, client, login_token):
-        rq = client.get("/api/logout", headers={"Authorization": f"Barer {login_token}"})
+    def test_correct_token_should_be_remove_user_and_return_204(self, client, login_token_header):
+        rq = client.get("/api/logout", headers=login_token_header)
 
         assert rq.status_code == 204
 

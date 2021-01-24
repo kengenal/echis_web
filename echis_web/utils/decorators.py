@@ -70,7 +70,7 @@ def login_required_api(func):
             try:
                 token_decode = decode_token(clear_token)
                 get_user = User.get_user_or_rise_exception(public_id=token_decode.get("public_id", None))
-                g["user"] = get_user
+                g.user = get_user
             except jwt.PyJWTError:
                 raise UnauthorizedException()
         return func(*args, **kwargs)
@@ -78,20 +78,22 @@ def login_required_api(func):
     return wrapper_func
 
 
-def has_perm_api(permissions=None):
+def has_perm_api(permissions=None, methods=None):
     """ Check user permissions if user don't have permission raise ForbiddenException """
     if permissions is None:
         permissions = []
+    if methods is None:
+        methods = []
 
     def decorator(func):
         @wraps(func)
         def wrapper_func(*args, **kwargs):
-            user = g.get("user")
-            perms = [x for x in permissions if user.has_perm(x) is True]
-            if len(perms) == 0:
-                raise ForbiddenException()
+            user = g.user
+            if request.method in methods or not methods:
+                perms = [x for x in permissions if user.has_perm(x) is True]
+                if len(perms) == 0:
+                    raise ForbiddenException()
             return func(*args, **kwargs)
-
         return wrapper_func
 
     return decorator

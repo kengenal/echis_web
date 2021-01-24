@@ -52,12 +52,13 @@ def token():
 
 
 @pytest.fixture
-def login_token(user):
+def login_token_header(client, user):
+    """ Return auth header with correct token """
     payload = {
         "public_id": str(user.public_id)
     }
     token = create_token(data=payload)
-    return token
+    return {"Authorization": f"Barer {token}"}
 
 
 @pytest.fixture
@@ -75,7 +76,7 @@ def api_login(client, user):
     def mock(*args, **kwargs):
         g.user = user
 
-    patch("echis_web.utils.decorator.login_required", mock).start()
+    patch("echis_web.utils.decorators.login_required", mock).start()
 
 
 @pytest.fixture()
