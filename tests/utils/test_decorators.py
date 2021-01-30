@@ -61,7 +61,7 @@ class TestLoginRequired:
         token = create_token({"public_id": str(user.public_id)})
         with patch(REQUEST_PATH, FakeRequest) as r:
             with patch(G_OBJECT_PATH, GObject):
-                r.headers["Authorization"] = f"Barer {token}"
+                r.headers["Authorization"] = f"Bearer {token}"
                 dec = login_required_api(lambda x: x)(1)
                 assert dec == 1
 
@@ -78,7 +78,7 @@ class TestLoginRequired:
         with patch(REQUEST_PATH, FakeRequest) as r:
             with patch(G_OBJECT_PATH, GObject):
                 with pytest.raises(UnauthorizedException) as err:
-                    r.headers["Authorization"] = f"Barer {token}"
+                    r.headers["Authorization"] = f"Bearer {token}"
                     login_required_api(lambda x: x)(1)
                     assert err.status_code == 401
 

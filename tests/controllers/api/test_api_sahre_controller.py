@@ -54,3 +54,22 @@ class TestApiController:
         rq = client.put(f"/api/share/playlist/{playlists.playlist_id}", json={}, headers=login_token_header)
 
         assert rq.status_code == 400
+
+    def test_update_incorrect_id_should_be_return_400(self, client, login_token_header, playlists):
+        payload = {
+            "playlist_id": str(uuid.uuid4()),
+            "api": "spotify",
+            "is_active": False
+        }
+        rq = client.put(f"/api/share/playlist/{uuid.uuid4()}", json=payload, headers=login_token_header)
+        assert rq.status_code == 404
+
+    def test_delete_playlist_correct_playlist_id_should_be_return_204(self, client, login_token_header, playlists):
+        rq = client.delete(f"/api/share/playlist/{playlists.playlist_id}", headers=login_token_header)
+
+        assert rq.status_code == 204
+
+    def test_delete_playlist_incorrect_playlist_id_should_be_return_404(self, client, login_token_header, playlists):
+        rq = client.delete(f"/api/share/playlist/{str(uuid.uuid4())}", json={}, headers=login_token_header)
+
+        assert rq.status_code == 404

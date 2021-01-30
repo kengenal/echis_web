@@ -66,7 +66,7 @@ def login_required_api(func):
     @wraps(func)
     def wrapper_func(*args, **kwargs):
         if token := request.headers.get("Authorization", None):
-            clear_token = token.replace("Barer", "").strip()
+            clear_token = token.replace("Bearer", "").strip()
             try:
                 token_decode = decode_token(clear_token)
                 get_user = User.get_user_or_rise_exception(public_id=token_decode.get("public_id", None))
@@ -94,6 +94,7 @@ def has_perm_api(permissions=None, methods=None):
                 if len(perms) == 0:
                     raise ForbiddenException()
             return func(*args, **kwargs)
+
         return wrapper_func
 
     return decorator

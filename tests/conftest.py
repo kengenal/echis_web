@@ -58,7 +58,7 @@ def login_token_header(client, user):
         "public_id": str(user.public_id)
     }
     token = create_token(data=payload)
-    return {"Authorization": f"Barer {token}"}
+    return {"Authorization": f"Bearer {token}"}
 
 
 @pytest.fixture

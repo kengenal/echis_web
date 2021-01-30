@@ -1,13 +1,13 @@
 class TestApiAuthController:
     def test_get_api_correct_token_should_be_return_jwt_token(self, client, token, user):
-        rq = client.get(f"/api/auth", headers={"Authorization": f"Barer {token}"})
+        rq = client.get(f"/api/auth", headers={"Authorization": f"Bearer {token}"})
 
         assert rq.status_code == 200
         assert b"token" in rq.data
         assert b"user" in rq.data
 
     def test_bad_payload_data_from_token_should_be_raise_400(self, token_invalid_payload, client, user):
-        rq = client.get(f"/api/auth", headers={"Authorization": f"Barer {token_invalid_payload}"})
+        rq = client.get(f"/api/auth", headers={"Authorization": f"Bearer {token_invalid_payload}"})
 
         assert rq.status_code == 400
         assert b"avatar" in rq.data
@@ -32,6 +32,6 @@ class TestApiLogoutController:
         assert rq.status_code == 400
 
     def test_wrong_token_should_be_raise_400(self, client):
-        rq = client.get("/api/logout", headers={"Authorization": "Barer osiem"})
+        rq = client.get("/api/logout", headers={"Authorization": "Bearer osiem"})
 
         assert rq.status_code == 400
