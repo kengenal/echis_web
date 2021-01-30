@@ -19,6 +19,15 @@ REQUEST_PATH = "echis_web.utils.decorators.request"
 G_OBJECT_PATH = "echis_web.utils.decorators.g"
 
 
+class FakeRequest:
+    headers = {}
+    method = "POST"
+
+
+class GObject:
+    user = None
+
+
 # TEST LOGIN REQUIRED
 def mock_abort(*args, **kwargs):
     return 404
@@ -47,6 +56,31 @@ class TestLoginRequired:
             dec = login_required(lambda x: x)(1)
 
             assert dec == 1
+
+    def test_api_user_is_authorized_should_be_return_200(self, client, user):
+        token = create_token({"public_id": str(user.public_id)})
+        with patch(REQUEST_PATH, FakeRequest) as r:
+            with patch(G_OBJECT_PATH, GObject):
+                r.headers["Authorization"] = f"Bearer {token}"
+                dec = login_required_api(lambda x: x)(1)
+                assert dec == 1
+
+    def test_api_user_is_unauthorized_should_be_return_401(self):
+        with patch(REQUEST_PATH, FakeRequest) as r:
+            with patch(G_OBJECT_PATH, GObject):
+                with pytest.raises(UnauthorizedException) as err:
+                    r.headers["Authorization"] = "test"
+                    login_required_api(lambda x: x)(1)
+                    assert err.status_code == 401
+
+    def test_api_user_not_exist_should_be_return_401(self, client, user):
+        token = create_token({"public_id": str(uuid4())})
+        with patch(REQUEST_PATH, FakeRequest) as r:
+            with patch(G_OBJECT_PATH, GObject):
+                with pytest.raises(UnauthorizedException) as err:
+                    r.headers["Authorization"] = f"Bearer {token}"
+                    login_required_api(lambda x: x)(1)
+                    assert err.status_code == 401
 
 
 # TEST HAS PERMISSIONS
@@ -92,9 +126,6 @@ class TestHasPerms:
 
 # Test Unauthorized
 
-class FakeRequest:
-    headers = {}
-
 
 class TestUnauthorized:
     def test_user_is_authorized_should_be_return_404(self, abort):
@@ -111,51 +142,40 @@ class TestUnauthorized:
 
             assert dec == 1
 
-    def test_api_user_is_authorized_should_be_return_200(self, client, user):
-        token = create_token({"public_id": str(user.public_id)})
-        with patch(REQUEST_PATH, FakeRequest) as r:
-            with patch(G_OBJECT_PATH, dict()):
-                r.headers["Authorization"] = f"Barer {token}"
-                dec = login_required_api(lambda x: x)(1)
-                assert dec == 1
 
-    def test_api_user_is_unauthorized_should_be_return_401(self):
-        with patch(REQUEST_PATH, FakeRequest) as r:
-            with patch(G_OBJECT_PATH, dict()):
-                with pytest.raises(UnauthorizedException) as err:
-                    r.headers["Authorization"] = "test"
-                    login_required_api(lambda x: x)(1)
-                    assert err.status_code == 401
-
-    def test_api_user_not_exist_should_be_return_401(self, client, user):
-        token = create_token({"public_id": str(uuid4())})
-        with patch(REQUEST_PATH, FakeRequest) as r:
-            with patch(G_OBJECT_PATH, dict()):
-                with pytest.raises(UnauthorizedException) as err:
-                    r.headers["Authorization"] = f"Barer {token}"
-                    login_required_api(lambda x: x)(1)
-                    assert err.status_code == 401
-
-
-class TestHasPermission:
+class TestHasPermissionApi:
     def test_user_has_permission(self, client, user):
-        with patch(G_OBJECT_PATH, dict()) as g:
-            @has_perm_api(["admin"])
-            def t():
-                return 1
-
-            g["user"] = user
-
-            dec = t()
-            assert dec == 1
-
-    def test_user_dont_have_permission_should_be_raise_exception(self, client, user):
-        with pytest.raises(ForbiddenException) as err:
-            with patch(G_OBJECT_PATH, dict()) as g:
-                @has_perm_api(["random_permission"])
+        with patch(G_OBJECT_PATH, GObject) as g:
+            with patch(REQUEST_PATH, FakeRequest):
+                @has_perm_api(["admin"], methods=["POST"])
                 def t():
                     return 1
 
-                g["user"] = user
-                t()
-                assert err.status_code == 403
+                g.user = user
+                dec = t()
+
+                assert dec == 1
+
+    def test_user_has_permission_without_set_http_method(self, client, user):
+        with patch(G_OBJECT_PATH, GObject) as g:
+            with patch(REQUEST_PATH, FakeRequest):
+                @has_perm_api(["admin"])
+                def t():
+                    return 1
+
+                g.user = user
+                dec = t()
+
+                assert dec == 1
+
+    def test_user_dont_have_permission_should_be_raise_exception(self, client, user):
+        with pytest.raises(ForbiddenException) as err:
+            with patch(G_OBJECT_PATH, GObject) as g:
+                with patch(REQUEST_PATH, FakeRequest):
+                    @has_perm_api(["random_permission"], methods=["POST"])
+                    def t():
+                        return 1
+
+                    g.user = user
+                    t()
+                    assert err.status_code == 403

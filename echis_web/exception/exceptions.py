@@ -24,3 +24,8 @@ class ForbiddenException(HttpBaseException):
 
 class BadRequestException(HttpBaseException):
     status_code = 400
+
+
+class NotFoundException(HttpBaseException):
+    status_code = 404
+    message = "Page not found"
