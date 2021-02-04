@@ -4,7 +4,7 @@ from flask.views import MethodView
 from jwt import PyJWTError
 from mongoengine import ValidationError
 
-from echis_web.controllers.api.docs.auth import api_login
+from echis_web.controllers.api.docs.auth.login import api_login
 from echis_web.exception.exceptions import BadRequestException
 from echis_web.model.user_model import User
 from echis_web.utils.token import decode_token, create_token
@@ -56,6 +56,9 @@ class ApiAuthController(MethodView):
 class ApiLogoutController(MethodView):
     @staticmethod
     def get():
+        """
+        file: docs/auth/logout.yaml
+        """
         try:
             decode = dec()
             user = User.objects.get_or_404(public_id=decode.get("public_id", None))

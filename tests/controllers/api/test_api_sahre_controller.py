@@ -5,7 +5,7 @@ class TestApiController:
     def test_get_playlists_without_pagination_should_be_return_status_ok(self, login_token_header, client, user,
                                                                          playlists):
         rq = client.get("/api/share/playlist", headers=login_token_header)
-
+        print(str(rq.data))
         assert rq.status_code == 200
         assert b"results" in rq.data
         assert b"page" in rq.data
@@ -33,7 +33,6 @@ class TestApiController:
             "api": "deezer",
             "is_active": True
         }
-
         rq = client.post("/api/share/playlist", json=payload, headers=login_token_header)
 
         assert rq.status_code == 400

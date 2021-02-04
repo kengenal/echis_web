@@ -73,6 +73,8 @@ def login_required_api(func):
                 g.user = get_user
             except jwt.PyJWTError:
                 raise UnauthorizedException()
+            except Exception:
+                raise UnauthorizedException()
         return func(*args, **kwargs)
 
     return wrapper_func

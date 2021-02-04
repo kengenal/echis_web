@@ -1,0 +1,52 @@
+Update playlist by playlist id
+---
+tags:
+  - Share Playlists
+parameters:
+  - name: Authorization
+    type: Authorization
+    in: header
+    required: True
+  - in: path
+    name: playlist_id
+    type: string
+    required: true
+  - name: body
+    in: body
+    required: true
+    schema:
+      id: Playlist
+      properties:
+        playlist_id:
+          type: string
+          description: The playlist id
+        api:
+          type: string
+          description: "api, accept deezer, youtube, spotify"
+        is_active:
+          type: boolean
+          description: "Follow songs in plaulist"
+responses:
+  200:
+    description: Playlist has been updated
+    schema:
+      properties:
+        playlist_id:
+          type: string
+          description: "The playlist id"
+        api:
+          type: string
+          description: "api, accept deezer, youtube, spotify"
+        is_active:
+          type: boolean
+          description: "Follow songs in Playlist"
+  401:
+    description: "Missing token"
+    schema:
+      properties:
+        message:
+          type: string
+          default: "User not exists"
+  404:
+    description: "playlist not found return empty object {}"
+

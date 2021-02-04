@@ -1,0 +1,19 @@
+Logut and remove all user data
+---
+tags:
+  - Auth
+parameters:
+  - name: Authorization
+    type: Authorization
+    in: header
+    required: True
+responses:
+  204:
+    description: User has been deleted
+  401:
+    description: Missing token
+    schema:
+      properties:
+        message:
+          type: string
+          default: "User not exists"

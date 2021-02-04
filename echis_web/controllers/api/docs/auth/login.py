@@ -1,6 +1,9 @@
 from echis_web.utils.token import generate_fake_discord_token
 
 api_login = {
+    "tags": [
+        "Auth"
+    ],
     "parameters": [
         {
             "name": "Authorization",
@@ -52,9 +55,13 @@ api_login = {
             },
             "examples": {
                 "user": {
-                    "token": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJwdWJsaWNfaWQiOiJlNWQ2ZDJmOC03ZTgyLTQyZjEtODExOS1hMGJiNjFiNDhmMDQiLCJleHAiOjE2MTIwOTgyODN9.ET_WI7P3jOoDXvkEBeAZ8yF6zvGaXk8oeA1DpmjxnsI",
+                    "token": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9"
+                             ".eyJwdWJsaWNfaWQiOiJlNWQ2ZDJmOC03ZTgyLTQyZjEtODExOS1hMGJiNjFiNDhmMDQiLCJleHAiOjE2MTIwOTgyODN9.ET_WI7P3jOoDXvkEBeAZ8yF6zvGaXk8oeA1DpmjxnsI",
                     "user": {
-                        "avatar": "https://cdn.discordapp.com/widget-avatars/EK8101DeRW0t0Jeze4L3YapbumoaRLCDWs5bV9Ntqf0/O7VJsYBxprw5iDc2BUlaItDtc-whuW9HwNy8Jm9qH-eal5gw3LhlSfTeOOqcpH0_JJSCgLWwyP9v-Nei_8kvTW-bohSs7JnQyfoUI_-q7osntUmM2H4LsFUPHOma1TCW2VNZqoG0x8xhmA",
+                        "avatar": "https://cdn.discordapp.com/widget-avatars"
+                                  "/EK8101DeRW0t0Jeze4L3YapbumoaRLCDWs5bV9Ntqf0/O7VJsYBxprw5iDc2BUlaItDtc"
+                                  "-whuW9HwNy8Jm9qH-eal5gw3LhlSfTeOOqcpH0_JJSCgLWwyP9v-Nei_8kvTW-bohSs7JnQyfoUI_"
+                                  "-q7osntUmM2H4LsFUPHOma1TCW2VNZqoG0x8xhmA",
                         "discord_id": 13456,
                         "permissions": [
                             "ADMIN",
@@ -74,16 +81,4 @@ api_login = {
             "examples": {"Error": "Bad token"},
         }
     }
-}
-
-api_logout = {
-    "parameters": [
-        {
-            "tag": "Auth",
-            "name": "Authorization",
-            "in": "header",
-            "type": "string",
-            "default": None
-        }
-    ],
 }
