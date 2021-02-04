@@ -12,10 +12,13 @@ class ApiPlaylistController(MethodView):
 
     @staticmethod
     def get():
+        """
+        file: docs/playlists/get_items.yaml
+        """
         try:
             page = request.args.get("page", 1)
             playlists = Playlists.objects.paginate(page=int(page), per_page=current_app.config["PAGINATION"])
-            return jsonify(res={
+            return jsonify({
                 "results": playlists.total,
                 "page": page,
                 "playlists": playlists.items,
@@ -26,6 +29,9 @@ class ApiPlaylistController(MethodView):
 
     @staticmethod
     def post():
+        """
+        file: docs/playlists/create_item.yaml
+        """
         rq = request.get_json()
         try:
             playlist = Playlists(**rq)
@@ -37,6 +43,9 @@ class ApiPlaylistController(MethodView):
 
     @staticmethod
     def put(playlist_id):
+        """
+        file: docs/playlists/update_item.yaml
+        """
         try:
             rq = request.get_json()
             playlist = Playlists.objects.get_or_404(playlist_id=playlist_id)
@@ -53,6 +62,9 @@ class ApiPlaylistController(MethodView):
 
     @staticmethod
     def delete(playlist_id):
+        """
+        file: docs/playlists/delete_item.yaml
+        """
         try:
             playlist = Playlists.objects.get_or_404(playlist_id=playlist_id)
             playlist.delete()

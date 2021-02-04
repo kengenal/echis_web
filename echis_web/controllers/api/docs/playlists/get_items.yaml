@@ -1,0 +1,55 @@
+Get all playlists
+---
+tags:
+  - Share Playlists
+parameters:
+  - name: Authorization
+    type: Authorization
+    in: header
+    required: True
+  - name: Page
+    type: integer
+    in: query
+definitions:
+  Playlist:
+    type: object
+    properties:
+      api_available:
+        type: array
+        items: string
+      page:
+        type: integer
+      resolts:
+        type: integer
+      playlists:
+        type: array
+        items:
+          type: object
+          properties:
+            api:
+              type: string
+            created_at:
+              type: string
+            is_active:
+              type: boolean
+            playlist_id:
+              type: string
+            record_id:
+              type: string
+            user:
+              type: string
+responses:
+  200:
+    description: "Response playlist object"
+    schema:
+      $ref: '#/definitions/Playlist'
+  401:
+    description: "Missing token"
+    schema:
+      properties:
+        message:
+          type: string
+          default: "User not exists"
+  404:
+    description: "Not found"
+
