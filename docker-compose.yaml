@@ -10,12 +10,12 @@ services:
       MONGO_INITDB_ROOT_USERNAME: root
       MONGO_INITDB_ROOT_PASSWORD: example
 
-  #  mongo_seed:
-  #    build:
-  #      context: .
-  #      dockerfile: ./build/mongo_seed/Dockerfile
-  #    links:
-  #      - mongo
+  mongo_seed:
+    build:
+      context: .
+      dockerfile: ./build/mongo_seed/Dockerfile
+    links:
+      - mongo
 
   mongo-express:
     image: mongo-express

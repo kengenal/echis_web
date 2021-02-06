@@ -1,0 +1,602 @@
+[
+  {
+    "_id": {
+      "$oid": "5f5cf6b10925fbad499dddfd"
+    },
+    "record_id": {
+      "$binary": {
+        "base64": "aee7bNzIQ1+YrPWEuXyVEQ==",
+        "subType": "03"
+      }
+    },
+    "rank": 150322,
+    "song_id": "382354591",
+    "title": "Everyday",
+    "artist": "A Broken Silence",
+    "cover": "https://cdns-images.dzcdn.net/images/cover/a7215c87fb6439ad4ed247b3d1ceb504/500x500-000000-80-0-0.jpg",
+    "album": "All For What",
+    "playlist_id": "6492294924",
+    "added_to_playlist": "2020-09-10 19:57:25",
+    "added_by": "Kengenal",
+    "created_at": {
+      "$date": "2020-09-12T16:26:25.285Z"
+    },
+    "api": "deezer",
+    "is_shared": true
+  },
+  {
+    "_id": {
+      "$oid": "5f5d26bd0925fbad499dddfe"
+    },
+    "record_id": {
+      "$binary": {
+        "base64": "aee7bNzIQ1+YrPWEuXyVEQ==",
+        "subType": "03"
+      }
+    },
+    "rank": 70832,
+    "song_id": "140138361",
+    "title": "Perfect World",
+    "artist": "Heroic",
+    "cover": "https://e-cdns-images.dzcdn.net/images/cover/a08b7d30a88076ff343f5ed7ff0f757f/500x500-000000-80-0-0.jpg",
+    "album": "Perfect World",
+    "playlist_id": "6492294924",
+    "added_to_playlist": "2020-09-12 19:47:19",
+    "added_by": "Kengenal",
+    "created_at": {
+      "$date": "2020-09-12T19:51:25.212Z"
+    },
+    "api": "deezer",
+    "is_shared": true
+  },
+  {
+    "_id": {
+      "$oid": "5f5e6f1b14d5895b51b7bcc8"
+    },
+    "record_id": {
+      "$binary": {
+        "base64": "F5CJCDmjT4up9F3gfhG2Ow==",
+        "subType": "03"
+      }
+    },
+    "rank": 354958,
+    "song_id": "468080282",
+    "title": "Big Tings",
+    "artist": "Skindred",
+    "cover": "https://e-cdns-images.dzcdn.net/images/cover/0c13402db71b28fa9b509a5c35a09eb5/500x500-000000-80-0-0.jpg",
+    "album": "Big Tings",
+    "playlist_id": "6492294924",
+    "added_to_playlist": "2020-09-13 19:11:37",
+    "added_by": "Kengenal",
+    "created_at": {
+      "$date": "2020-09-13T19:12:27.938Z"
+    },
+    "api": "deezer",
+    "is_shared": true
+  },
+  {
+    "_id": {
+      "$oid": "5f62373feb425a816765a053"
+    },
+    "record_id": {
+      "$binary": {
+        "base64": "SadJgFPSQW2nwnQhOjmwqg==",
+        "subType": "03"
+      }
+    },
+    "rank": 414742,
+    "song_id": "68787395",
+    "title": "Bury Me With My Guns",
+    "artist": "Bobaflex",
+    "cover": "https://e-cdns-images.dzcdn.net/images/cover/496a5de386e8d6058a0820d3dbdce5b9/500x500-000000-80-0-0.jpg",
+    "album": "Hell in My Heart",
+    "playlist_id": "6492294924",
+    "added_to_playlist": "2020-09-16 16:02:48",
+    "added_by": "Kengenal",
+    "created_at": {
+      "$date": "2020-09-16T16:03:11.863Z"
+    },
+    "api": "deezer",
+    "is_shared": true
+  },
+  {
+    "_id": {
+      "$oid": "5f637ccfcb459931acac0c46"
+    },
+    "record_id": {
+      "$binary": {
+        "base64": "9/V+C8uSSfatYczf/IWldw==",
+        "subType": "03"
+      }
+    },
+    "rank": 289251,
+    "song_id": "12785874",
+    "title": "Get Paid",
+    "artist": "Emphatic",
+    "cover": "https://cdns-images.dzcdn.net/images/cover/03d666906fd622a250b7e6cfc9de16c7/500x500-000000-80-0-0.jpg",
+    "album": "Damage",
+    "playlist_id": "6492294924",
+    "added_to_playlist": "2020-09-17 15:11:07",
+    "added_by": "Kengenal",
+    "created_at": {
+      "$date": "2020-09-17T15:12:15.971Z"
+    },
+    "api": "deezer",
+    "is_shared": true
+  },
+  {
+    "_id": {
+      "$oid": "5f65f0a3bcc7528f1888423b"
+    },
+    "record_id": {
+      "$binary": {
+        "base64": "lsFdalcGSPSBN6JpdwbtKQ==",
+        "subType": "03"
+      }
+    },
+    "rank": 434594,
+    "song_id": "3132929",
+    "title": "Born Dead",
+    "artist": "Body Count",
+    "cover": "https://cdns-images.dzcdn.net/images/cover/aa8efcdc9bda51f35299dfbb47c6be67/500x500-000000-80-0-0.jpg",
+    "album": "Born Dead",
+    "playlist_id": "6492294924",
+    "added_to_playlist": "2020-09-19 11:49:02",
+    "added_by": "Kengenal",
+    "created_at": {
+      "$date": "2020-09-19T11:50:59.366Z"
+    },
+    "api": "deezer",
+    "is_shared": true
+  },
+  {
+    "_id": {
+      "$oid": "5f7071fa1a47f0b099e45ddd"
+    },
+    "record_id": {
+      "$binary": {
+        "base64": "y9y3gw99QPqynOeavzlYhA==",
+        "subType": "03"
+      }
+    },
+    "rank": 478063,
+    "song_id": "65101172",
+    "title": "From Can to Can't",
+    "artist": "Corey Taylor",
+    "cover": "https://e-cdns-images.dzcdn.net/images/cover/24a7014e1c834de092d9c92b3791c25b/500x500-000000-80-0-0.jpg",
+    "album": "Sound City - Real to Reel",
+    "playlist_id": "6492294924",
+    "added_to_playlist": "2020-09-24 11:51:40",
+    "added_by": "Kengenal",
+    "created_at": {
+      "$date": "2020-09-27T11:05:30.428Z"
+    },
+    "api": "deezer",
+    "is_shared": true
+  },
+  {
+    "_id": {
+      "$oid": "5f70baa21a47f0b099e45dde"
+    },
+    "record_id": {
+      "$binary": {
+        "base64": "y9y3gw99QPqynOeavzlYhA==",
+        "subType": "03"
+      }
+    },
+    "rank": 305674,
+    "song_id": "11965422",
+    "title": "Poker Face",
+    "artist": "Blowsight",
+    "cover": "https://e-cdns-images.dzcdn.net/images/cover/09ed1ae221de6838f41e594e219d7782/500x500-000000-80-0-0.jpg",
+    "album": "Poker Face",
+    "playlist_id": "6492294924",
+    "added_to_playlist": "2020-09-27 16:11:42",
+    "added_by": "Kengenal",
+    "created_at": {
+      "$date": "2020-09-27T16:15:30.226Z"
+    },
+    "api": "deezer",
+    "is_shared": true
+  },
+  {
+    "_id": {
+      "$oid": "5f762a9dc4738a89706df51a"
+    },
+    "record_id": {
+      "$binary": {
+        "base64": "vgJGx/UtS1WnpmQJQdg7tw==",
+        "subType": "03"
+      }
+    },
+    "rank": 337631,
+    "song_id": "660399",
+    "title": "Becoming the Bull",
+    "artist": "Atreyu",
+    "cover": "https://cdns-images.dzcdn.net/images/cover/abcd866df07be8a4be4e3c9745c91870/500x500-000000-80-0-0.jpg",
+    "album": "Lead Sails Paper Anchor",
+    "playlist_id": "6492294924",
+    "added_to_playlist": "2020-10-01 19:10:35",
+    "added_by": "Kengenal",
+    "created_at": {
+      "$date": "2020-10-01T19:14:37.710Z"
+    },
+    "api": "deezer",
+    "is_shared": true
+  },
+  {
+    "_id": {
+      "$oid": "5f763781c4738a89706df51b"
+    },
+    "record_id": {
+      "$binary": {
+        "base64": "vgJGx/UtS1WnpmQJQdg7tw==",
+        "subType": "03"
+      }
+    },
+    "rank": 655268,
+    "song_id": "930472952",
+    "title": "Let The Chaos Reign",
+    "artist": "Pop Evil",
+    "cover": "https://e-cdns-images.dzcdn.net/images/cover/919bf86a1779186a6795e2decf9583d2/500x500-000000-80-0-0.jpg",
+    "album": "Let The Chaos Reign",
+    "playlist_id": "6492294924",
+    "added_to_playlist": "2020-10-01 20:05:12",
+    "added_by": "Kengenal",
+    "created_at": {
+      "$date": "2020-10-01T20:09:37.765Z"
+    },
+    "api": "deezer",
+    "is_shared": true
+  },
+  {
+    "_id": {
+      "$oid": "5f7638adc4738a89706df51c"
+    },
+    "record_id": {
+      "$binary": {
+        "base64": "vgJGx/UtS1WnpmQJQdg7tw==",
+        "subType": "03"
+      }
+    },
+    "rank": 769578,
+    "song_id": "803968452",
+    "title": "Popular Monster",
+    "artist": "Falling In Reverse",
+    "cover": "https://e-cdns-images.dzcdn.net/images/cover/255346c64515bac9c0f16fcf6a051737/500x500-000000-80-0-0.jpg",
+    "album": "Popular Monster",
+    "playlist_id": "6492294924",
+    "added_to_playlist": "2020-10-01 20:09:45",
+    "added_by": "Kengenal",
+    "created_at": {
+      "$date": "2020-10-01T20:14:37.785Z"
+    },
+    "api": "deezer",
+    "is_shared": true
+  },
+  {
+    "_id": {
+      "$oid": "5f7f6b488e0b9bc34e1667ed"
+    },
+    "record_id": {
+      "$binary": {
+        "base64": "kfGdHUFYTx+jsQLWCpv7Jg==",
+        "subType": "03"
+      }
+    },
+    "rank": 358091,
+    "song_id": "69621469",
+    "title": "I'm Glad You're Dead",
+    "artist": "Bobaflex",
+    "cover": "https://cdns-images.dzcdn.net/images/cover/a39b5125b681991f0587f805943f68bc/500x500-000000-80-0-0.jpg",
+    "album": "Charlatan's Web",
+    "playlist_id": "6492294924",
+    "added_to_playlist": "2020-10-08 19:38:20",
+    "added_by": "Kengenal",
+    "created_at": {
+      "$date": "2020-10-08T19:40:56.923Z"
+    },
+    "api": "deezer",
+    "is_shared": true
+  },
+  {
+    "_id": {
+      "$oid": "5f874b9120b10cad86adc002"
+    },
+    "record_id": {
+      "$binary": {
+        "base64": "QWxcG1PfTcWzcxOFC23xrg==",
+        "subType": "03"
+      }
+    },
+    "rank": 377388,
+    "song_id": "80859814",
+    "title": "Lose My Life",
+    "artist": "Papercut Massacre",
+    "cover": "https://e-cdns-images.dzcdn.net/images/cover/6498d3234fb1847aa9108eb0cafba358/500x500-000000-80-0-0.jpg",
+    "album": "If These Scars Could Talk",
+    "playlist_id": "6492294924",
+    "added_to_playlist": "2020-10-14 19:03:10",
+    "added_by": "Kengenal",
+    "created_at": {
+      "$date": "2020-10-14T19:03:45.169Z"
+    },
+    "api": "deezer",
+    "is_shared": true
+  },
+  {
+    "_id": {
+      "$oid": "5f8754f120b10cad86adc003"
+    },
+    "record_id": {
+      "$binary": {
+        "base64": "QWxcG1PfTcWzcxOFC23xrg==",
+        "subType": "03"
+      }
+    },
+    "rank": 196578,
+    "song_id": "72454547",
+    "title": "Face To My Fist",
+    "artist": "Fall of Envy",
+    "cover": "https://cdns-images.dzcdn.net/images/cover/79849a3ea9e4805d3ea08c253acf1644/500x500-000000-80-0-0.jpg",
+    "album": "Poetic Rage Special Edition",
+    "playlist_id": "6492294924",
+    "added_to_playlist": "2020-10-14 19:38:48",
+    "added_by": "Kengenal",
+    "created_at": {
+      "$date": "2020-10-14T19:43:45.102Z"
+    },
+    "api": "deezer",
+    "is_shared": true
+  },
+  {
+    "_id": {
+      "$oid": "5f883aa120b10cad86adc004"
+    },
+    "record_id": {
+      "$binary": {
+        "base64": "QWxcG1PfTcWzcxOFC23xrg==",
+        "subType": "03"
+      }
+    },
+    "rank": 300850,
+    "song_id": "3659347",
+    "title": "Empty (Live Version)",
+    "artist": "Unloco",
+    "cover": "https://e-cdns-images.dzcdn.net/images/cover/52f554eba3894f3d1c6253401d0ff58e/500x500-000000-80-0-0.jpg",
+    "album": "Music as a Weapon II",
+    "playlist_id": "6492294924",
+    "added_to_playlist": "2020-10-15 12:03:36",
+    "added_by": "Kengenal",
+    "created_at": {
+      "$date": "2020-10-15T12:03:45.099Z"
+    },
+    "api": "deezer",
+    "is_shared": true
+  },
+  {
+    "_id": {
+      "$oid": "5fb55472fdb2e6b5f832678e"
+    },
+    "record_id": {
+      "$binary": {
+        "base64": "pPQqoYNNTUGkREVYEb3sQg==",
+        "subType": "03"
+      }
+    },
+    "rank": 202698,
+    "song_id": "519142572",
+    "title": "S.O.S. (Sawed Off Shotgun)",
+    "artist": "The Glorious Sons",
+    "cover": "https://e-cdns-images.dzcdn.net/images/cover/00432f2bd2ad9d75b9d3c7cc7d93e873/500x500-000000-80-0-0.jpg",
+    "album": "S.O.S. (Sawed Off Shotgun)",
+    "playlist_id": "6492294924",
+    "added_to_playlist": "2020-11-18 17:01:04",
+    "added_by": "Kengenal",
+    "created_at": {
+      "$date": "2020-11-18T17:05:54.712Z"
+    },
+    "api": "deezer",
+    "is_shared": true
+  },
+  {
+    "_id": {
+      "$oid": "5fb6dfeb9c87c79d684e1473"
+    },
+    "record_id": {
+      "$binary": {
+        "base64": "7EJ+C33GTEKleGrfLa2Cqw==",
+        "subType": "03"
+      }
+    },
+    "rank": 594417,
+    "song_id": "3825403",
+    "title": "Devour",
+    "artist": "Shinedown",
+    "cover": "https://cdns-images.dzcdn.net/images/cover/509fe6a47b43a4e06e0ca18785303969/500x500-000000-80-0-0.jpg",
+    "album": "The Sound of Madness",
+    "playlist_id": "6492294924",
+    "added_to_playlist": "2020-11-19 21:08:56",
+    "added_by": "Kengenal",
+    "created_at": {
+      "$date": "2020-11-19T21:13:15.462Z"
+    },
+    "api": "deezer",
+    "is_shared": true
+  },
+  {
+    "_id": {
+      "$oid": "5fb960b1936b6c0b461925e2"
+    },
+    "record_id": {
+      "$binary": {
+        "base64": "MxipulWBRO+joIXEdsEO9g==",
+        "subType": "03"
+      }
+    },
+    "rank": 413397,
+    "song_id": "23096071",
+    "title": "Our World",
+    "artist": "Avery Watts",
+    "cover": "https://e-cdns-images.dzcdn.net/images/cover/be93ef5c17034ff4d67ed41e3d350062/500x500-000000-80-0-0.jpg",
+    "album": "The Takeover",
+    "playlist_id": "6492294924",
+    "added_to_playlist": "2020-11-21 18:42:14",
+    "added_by": "Kengenal",
+    "created_at": {
+      "$date": "2020-11-21T18:47:13.092Z"
+    },
+    "api": "deezer",
+    "is_shared": true
+  },
+  {
+    "_id": {
+      "$oid": "5fb961dd936b6c0b461925e3"
+    },
+    "record_id": {
+      "$binary": {
+        "base64": "MxipulWBRO+joIXEdsEO9g==",
+        "subType": "03"
+      }
+    },
+    "rank": 298677,
+    "song_id": "1189522",
+    "title": "Beginning of the End",
+    "artist": "Spineshank",
+    "cover": "https://cdns-images.dzcdn.net/images/cover/a668e9a5440e399c35165579a91c0086/500x500-000000-80-0-0.jpg",
+    "album": "Self-Destructive Pattern",
+    "playlist_id": "6492294924",
+    "added_to_playlist": "2020-11-21 18:50:08",
+    "added_by": "Kengenal",
+    "created_at": {
+      "$date": "2020-11-21T18:52:13.073Z"
+    },
+    "api": "deezer",
+    "is_shared": true
+  },
+  {
+    "_id": {
+      "$oid": "5fbc20e0bd6eb8169f22b9a5"
+    },
+    "record_id": {
+      "$binary": {
+        "base64": "f5X929sYQiynNvbKsejRDg==",
+        "subType": "03"
+      }
+    },
+    "rank": 268882,
+    "song_id": "132183220",
+    "title": "Ready for War (Pray for Peace)",
+    "artist": "Adelitas Way",
+    "cover": "https://cdns-images.dzcdn.net/images/cover/c85bc5751bd2df720329ee121bc063c1/500x500-000000-80-0-0.jpg",
+    "album": "Ready for War (Pray for Peace)",
+    "playlist_id": "6492294924",
+    "added_to_playlist": "2020-11-23 20:50:08",
+    "added_by": "Kengenal",
+    "created_at": {
+      "$date": "2020-11-23T20:51:44.268Z"
+    },
+    "api": "deezer",
+    "is_shared": true
+  },
+  {
+    "_id": {
+      "$oid": "5fc8020bdbf66b3f97a8537c"
+    },
+    "record_id": {
+      "$binary": {
+        "base64": "GVP9RyVMSBGfcVkZwD5dpA==",
+        "subType": "03"
+      }
+    },
+    "rank": 322828,
+    "song_id": "61993971",
+    "title": "Something New",
+    "artist": "Rev Theory",
+    "cover": "https://e-cdns-images.dzcdn.net/images/cover/39e35b33a4c0df9c63374a10d7a1b8a1/500x500-000000-80-0-0.jpg",
+    "album": "Take Em Out",
+    "playlist_id": "6492294924",
+    "added_to_playlist": "2020-12-02 21:02:58",
+    "added_by": "Kengenal",
+    "created_at": {
+      "$date": "2020-12-02T21:07:23.668Z"
+    },
+    "api": "deezer",
+    "is_shared": true
+  },
+  {
+    "_id": {
+      "$oid": "5fcc1930e3c07bd4e035a65f"
+    },
+    "record_id": {
+      "$binary": {
+        "base64": "Mgrs0uY5Rgm3YId4YTC1pg==",
+        "subType": "03"
+      }
+    },
+    "rank": 339965,
+    "song_id": "2177200",
+    "title": "Super Charger Heaven",
+    "artist": "White Zombie",
+    "cover": "https://e-cdns-images.dzcdn.net/images/cover/9a3d73784b6bfc7fe5905f06967f6db1/500x500-000000-80-0-0.jpg",
+    "album": "Astro Creep: 2000 Songs Of Love, Destruction And Other Synthetic Delusions Of The Electric Head",
+    "playlist_id": "6492294924",
+    "added_to_playlist": "2020-12-05 23:30:20",
+    "added_by": "Kengenal",
+    "created_at": {
+      "$date": "2020-12-05T23:35:12.797Z"
+    },
+    "api": "deezer",
+    "is_shared": true
+  },
+  {
+    "_id": {
+      "$oid": "5fd9e5a61723378c6b606248"
+    },
+    "record_id": {
+      "$binary": {
+        "base64": "Hxfi/SBYSxyDiSjdXOJPoA==",
+        "subType": "03"
+      }
+    },
+    "rank": 116979,
+    "song_id": "140850055",
+    "title": "Living in a Nightmare",
+    "artist": "Blacklite District",
+    "cover": "https://e-cdns-images.dzcdn.net/images/cover/0097befec0b3bc200c6e1149a46a1627/500x500-000000-80-0-0.jpg",
+    "album": "Living in a Nightmare",
+    "playlist_id": "6492294924",
+    "added_to_playlist": "2019-09-15 19:10:51",
+    "added_by": "Kengenal",
+    "created_at": {
+      "$date": "2020-12-16T10:47:02.733Z"
+    },
+    "api": "deezer",
+    "is_shared": true
+  },
+  {
+    "_id": {
+      "$oid": "5fdea8841fc5effb2b6f1e7a"
+    },
+    "record_id": {
+      "$binary": {
+        "base64": "IRHRaBQ3SxSl8D8/nEQeBg==",
+        "subType": "03"
+      }
+    },
+    "rank": 456045,
+    "song_id": "384103711",
+    "title": "Black Wedding (feat. Rob Halford)",
+    "artist": "In This Moment",
+    "cover": "https://cdns-images.dzcdn.net/images/cover/6df451280fd157a23063441f6f1969f3/500x500-000000-80-0-0.jpg",
+    "album": "Ritual",
+    "playlist_id": "6492294924",
+    "added_to_playlist": "2020-12-20 01:24:17",
+    "added_by": "Kengenal",
+    "created_at": {
+      "$date": "2020-12-20T01:27:32.125Z"
+    },
+    "api": "deezer",
+    "is_shared": true
+  }
+]
