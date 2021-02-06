@@ -10,6 +10,13 @@ services:
       MONGO_INITDB_ROOT_USERNAME: root
       MONGO_INITDB_ROOT_PASSWORD: example
 
+  mongo_seed:
+    build:
+      context: .
+      dockerfile: ./build/mongo_seed/Dockerfile
+    links:
+      - mongo
+
   mongo-express:
     image: mongo-express
     restart: always
@@ -29,8 +36,8 @@ services:
       FLASK_APP: main.py
       FLASK_DEBUG: 1
       FLASK_ENV: develop
-      DJANGO_SECRET_KEY: sadasfdsadasd
-      MONGO_URL: mongodb://root:example@mongo:27017/admin
+      SECRET_KEY: sadasfdsadasd
+      MONGO_URL: mongodb://root:example@mongo:27017/discord
       TOKEN_ALGORITHM: HS512
       TOKEN_SECRET: asmklasfhiudhfiu
     labels:

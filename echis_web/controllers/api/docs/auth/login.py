@@ -4,6 +4,9 @@ api_login = {
     "tags": [
         "Auth"
     ],
+    "security": {
+        "bearerAuth": [],
+    },
     "parameters": [
         {
             "name": "Authorization",
@@ -14,9 +17,6 @@ api_login = {
         }
     ],
     "definitions": {
-        "Permissions": {
-            "type": "string"
-        },
         "Auth": {
             "type": "object",
             "properties": {
@@ -29,20 +29,12 @@ api_login = {
                         "permissions": {
                             "type": "array",
                             "items": {
-                                "$ref": "#/definitions/Permissions"
+                                "type": "string"
                             }
                         },
                         "public_id": {"type": "string"},
                         "username": {"type": "string"},
                     },
-                }
-            }
-        },
-        "UnAuth": {
-            "type": "object",
-            "properties": {
-                "Error": {
-                    "type": "string"
                 }
             }
         }
@@ -76,9 +68,14 @@ api_login = {
         "401": {
             "description": "Bad token exception",
             "schema": {
-                "$ref": "#/definitions/UnAuth"
-            },
-            "examples": {"Error": "Bad token"},
-        }
+                "properties": {
+                    "Error": {
+                        "type": "string",
+                        "description": "Invalid token",
+                    }
+                }
+            }
+        },
+        "examples": {"Error": "Bad token"},
     }
 }

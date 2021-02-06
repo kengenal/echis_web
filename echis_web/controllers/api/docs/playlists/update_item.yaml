@@ -2,6 +2,8 @@ Update playlist by playlist id
 ---
 tags:
   - Share Playlists
+security:
+  - bearerAuth: [ ]
 parameters:
   - name: Authorization
     type: Authorization
@@ -19,6 +21,7 @@ parameters:
       properties:
         playlist_id:
           type: string
+          format: uuid
           description: The playlist id
         api:
           type: string
@@ -33,6 +36,7 @@ responses:
       properties:
         playlist_id:
           type: string
+          format: uuid
           description: "The playlist id"
         api:
           type: string

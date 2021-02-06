@@ -1,7 +1,7 @@
-Logut and remove all user data
+Delete Song
 ---
 tags:
-  - Auth
+  - Share Songs
 security:
   - bearerAuth: [ ]
 parameters:
@@ -9,13 +9,19 @@ parameters:
     type: Authorization
     in: header
     required: True
+  - in: path
+    name: record_id
+    type: string
+    required: true
 responses:
   204:
-    description: User has been deleted
+    description: "Song has been deleted"
   401:
-    description: Missing token
+    description: "Missing token"
     schema:
       properties:
         message:
           type: string
           default: "User not exists"
+  404:
+    description: "song not found"
