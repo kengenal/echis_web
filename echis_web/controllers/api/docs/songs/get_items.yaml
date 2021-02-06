@@ -1,7 +1,7 @@
-Get all playlists
+Get all songs
 ---
 tags:
-  - Share Playlists
+  - Share Songs
 parameters:
   - name: Authorization
     type: Authorization
@@ -10,13 +10,13 @@ parameters:
   - name: Page
     type: integer
     in: query
+  - name: record_id
+    type: string
+    in: path
 definitions:
-  Playlist:
+  Song:
     type: object
     properties:
-      api_available:
-        type: array
-        items: string
       page:
         type: integer
       resolts:
@@ -25,31 +25,48 @@ definitions:
         type: array
         items:
           type: string
-      playlists:
+      songs:
         type: array
         items:
           type: object
           properties:
+            _id:
+              type: string
+              format: uuid
+            added_by:
+              type: string
+            added_to_playlist:
+              type: string
+            album:
+              type: string
             api:
               type: string
+            cover:
+              type: string
+              format: uri
             created_at:
               type: string
               format: date-time
-            is_active:
+            is_shared:
               type: boolean
             playlist_id:
               type: string
               format: uuid
+            rank:
+              type: integer
             record_id:
               type: string
               format: uuid
-            user:
+            song_id:
               type: string
+            title:
+              type: string
+
 responses:
   200:
-    description: "Response playlist object"
+    description: "Response songs object"
     schema:
-      $ref: '#/definitions/Playlist'
+      $ref: '#/definitions/Song'
   401:
     description: "Missing token"
     schema:

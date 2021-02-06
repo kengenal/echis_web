@@ -15,6 +15,7 @@ parameters:
       properties:
         playlist_id:
           type: string
+          format: uuid
           description: "The playlist id"
         api:
           type: string
@@ -29,6 +30,7 @@ responses:
       properties:
         playlist_id:
           type: string
+          format: uuid
           description: The playlist id
         api:
           type: string

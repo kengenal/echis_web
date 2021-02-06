@@ -8,7 +8,7 @@ from flask import Flask, render_template, jsonify
 from flask_mongoengine import MongoEngineSessionInterface
 
 from echis_web.controllers.api.api_auth_controller import ApiAuthController, ApiLogoutController
-from echis_web.controllers.api.api_share_controller import ApiPlaylistController
+from echis_web.controllers.api.api_share_controller import ApiPlaylistController, ApiSongController
 from echis_web.controllers.auth_controller import auth
 from echis_web.controllers.home_controller import home
 from echis_web.controllers.share_controller import share
@@ -99,8 +99,11 @@ def load_commands(app):
 
 
 def route(app):
+    # AUTH
     app.add_url_rule("/api/auth", view_func=ApiAuthController.as_view("api_auth"))
     app.add_url_rule("/api/logout", view_func=ApiLogoutController.as_view("api_logout"))
+
+    # PLAYLIST
     app.add_url_rule(
         "/api/share/playlist",
         view_func=ApiPlaylistController.as_view("share_playlist"),
@@ -110,6 +113,18 @@ def route(app):
         "/api/share/playlist/<playlist_id>",
         view_func=ApiPlaylistController.as_view("share_playlist_parameter"),
         methods=["PUT", "DELETE"]
+    )
+
+    # SONGS
+    app.add_url_rule(
+        "/api/share/songs",
+        view_func=ApiSongController.as_view("share_songs"),
+        methods=["GET"]
+    )
+    app.add_url_rule(
+        "/api/share/songs/<record_id>",
+        view_func=ApiSongController.as_view("share_songs_parameter"),
+        methods=["DELETE"]
     )
 
 

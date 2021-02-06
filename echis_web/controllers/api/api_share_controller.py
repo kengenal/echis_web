@@ -3,15 +3,15 @@ from flask.views import MethodView
 from mongoengine import ValidationError
 
 from echis_web.exception.exceptions import NotFoundException, BadRequestException
-from echis_web.model.share_model import Playlists
+from echis_web.model.share_model import Playlists, SharedSongs
 from echis_web.utils.decorators import login_required_api, has_perm_api
 
 
 class ApiPlaylistController(MethodView):
-    decorators = [has_perm_api(permissions=["ADMIN"], methods=["POST", "PUT", "DELETE"]), login_required_api]
+    has_perm_for_methods = ["POST", "PUT", "DELETE"]
+    decorators = [has_perm_api(permissions=["ADMIN"], methods=has_perm_for_methods), login_required_api]
 
-    @staticmethod
-    def get():
+    def get(self):
         """
         file: docs/playlists/get_items.yaml
         """
@@ -21,6 +21,7 @@ class ApiPlaylistController(MethodView):
             return jsonify({
                 "results": playlists.total,
                 "page": page,
+                "has_admin": self.has_perm_for_methods,
                 "playlists": playlists.items,
                 "api_available": current_app.config["API_AVAILABLE"]
             })
@@ -69,5 +70,38 @@ class ApiPlaylistController(MethodView):
             playlist = Playlists.objects.get_or_404(playlist_id=playlist_id)
             playlist.delete()
             return jsonify({"Error": "Playlist has been removed"}), 204
+        except Exception:
+            raise NotFoundException()
+
+
+class ApiSongController(MethodView):
+    has_perm_for_methods = ["DELETE"]
+    decorators = [has_perm_api(permissions=["ADMIN"], methods=has_perm_for_methods), login_required_api]
+
+    def get(self):
+        """
+        file: docs/songs/get_items.yaml
+        """
+        try:
+            page = request.args.get("page", 1)
+            songs = SharedSongs.objects.paginate(page=int(page), per_page=current_app.config["PAGINATION"])
+            return jsonify({
+                "results": songs.total,
+                "page": page,
+                "has_admin": self.has_perm_for_methods,
+                "songs": songs.items,
+            })
+        except Exception:
+            raise NotFoundException()
+
+    @staticmethod
+    def delete(record_id):
+        """
+        file: docs/songs/delete_item.yaml
+        """
+        try:
+            song = SharedSongs.objects.get_or_404(record_id=record_id)
+            song.delete()
+            return jsonify({"Error": "Song has been removed"}), 204
         except Exception:
             raise NotFoundException()

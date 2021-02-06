@@ -1,0 +1,25 @@
+Delete Song
+---
+tags:
+  - Share Songs
+parameters:
+  - name: Authorization
+    type: Authorization
+    in: header
+    required: True
+  - in: path
+    name: record_id
+    type: string
+    required: true
+responses:
+  204:
+    description: "Song has been deleted"
+  401:
+    description: "Missing token"
+    schema:
+      properties:
+        message:
+          type: string
+          default: "User not exists"
+  404:
+    description: "song not found"
