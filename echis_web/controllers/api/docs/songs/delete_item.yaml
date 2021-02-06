@@ -2,6 +2,8 @@ Delete Song
 ---
 tags:
   - Share Songs
+security:
+  - bearerAuth: [ ]
 parameters:
   - name: Authorization
     type: Authorization

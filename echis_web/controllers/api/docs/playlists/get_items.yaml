@@ -2,6 +2,8 @@ Get all playlists
 ---
 tags:
   - Share Playlists
+security:
+  - bearerAuth: [ ]
 parameters:
   - name: Authorization
     type: Authorization

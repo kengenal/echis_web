@@ -1,7 +1,46 @@
 import os
 
 
-class Config(object):
+class SwaggerConfig:
+    SWAGGER_TEMPLATE = {
+        "info": {
+            "title": "Echis web docs",
+            "version": "1.0",
+        },
+        "components": {
+            "securitySchemes": {
+                "bearerAuth": {
+                    "type": "http",
+                    "scheme": "bearer",
+                    "bearerFormat": "JWT",
+                    "description": "Token"
+                }
+            }
+        },
+        "produces": [
+            "application/json",
+        ],
+        "security: {bearerAuth": [],
+    }
+    SWAGGER_CONFIG = {
+        "headers": [
+        ],
+        "specs": [
+            {
+                "endpoint": 'apispec_1',
+                "route": '/apispec_1.json',
+                "rule_filter": lambda rule: True,  # all in
+                "model_filter": lambda tag: True,  # all in
+            }
+        ],
+        "static_url_path": "/api/flasgger_static",
+        "swagger_ui": True,
+        "title": "Echis web docs",
+        "specs_route": "/api/docs"
+    }
+
+
+class Config:
     SECRET_KEY = os.getenv("SECRET_KEY", default="secret key")
     TOKEN_SECRET = os.getenv("TOKEN_SECRET", default="asdasdasd")
     TOKEN_ALGORITHM = os.getenv("TOKEN_ALGORITHM", default="HS256")
@@ -17,7 +56,7 @@ class ProdConfig(Config):
     }
 
 
-class DevConfig(Config):
+class DevConfig(Config, SwaggerConfig):
     ENV = "dev"
     DEBUG = True
 

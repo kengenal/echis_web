@@ -2,6 +2,8 @@ Logut and remove all user data
 ---
 tags:
   - Auth
+security:
+  - bearerAuth: [ ]
 parameters:
   - name: Authorization
     type: Authorization

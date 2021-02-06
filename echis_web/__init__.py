@@ -32,7 +32,6 @@ def create_app():
         object_name = "echis_web.settings.TestConfig"
 
     app.config.from_object(object_name)
-
     load_extensions(app, env)
 
     app.session_interface = MongoEngineSessionInterface(me)
@@ -66,27 +65,7 @@ def handle_invalid_usage(error):
 def load_extensions(app, env):
     if env == "develop":
         """ extensions only for development """
-        Swagger(app, template={
-            # "openapi": "3.0.0",
-            "info": {
-                "title": "Swagger Basic Auth App",
-                "version": "1.0",
-            },
-            "components": {
-                "securitySchemes": {
-                    "bearerAuth": {
-                        "type": "http",
-                        "scheme": "bearer",
-                        "bearerFormat": "JWT",
-                        "description": "Token"
-                    }
-                }
-            },
-            "produces": [
-                "application/json",
-            ],
-            "security: {bearerAuth": []
-        })
+        Swagger(app, template=app.config["SWAGGER_TEMPLATE"], config=app.config["SWAGGER_CONFIG"])
     me.init_app(app)
 
 

@@ -2,6 +2,8 @@ Create new playlsit to share
 ---
 tags:
   - Share Playlists
+security:
+  - bearerAuth: [ ]
 parameters:
   - name: Authorization
     type: Authorization
