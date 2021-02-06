@@ -1,0 +1,9 @@
+#!/bin/bash
+
+for file in /tmp/mongo/*
+do
+    FILE=$(basename $file);
+    name="${FILE%%.*}";
+    mongoimport --host mongo --username root --password example --db admin --collection $name --type json --file $file --jsonArray
+done
+

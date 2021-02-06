@@ -1,0 +1,20 @@
+[
+  {
+    "_id": {
+      "$oid": "5f5cf6470925fbad499dddfb"
+    },
+    "record_id": {
+      "$binary": {
+        "base64": "MfAy7qm+Qq6b8IIMYup58g==",
+        "subType": "03"
+      }
+    },
+    "playlist_id": "6492294924",
+    "user": "Kengenal",
+    "api": "deezer",
+    "is_active": true,
+    "created_at": {
+      "$date": "2020-09-12T16:24:39.581Z"
+    }
+  }
+]
