@@ -24,6 +24,7 @@ api_login = {
                 "user": {
                     "type": "object",
                     "properties": {
+                        "exp": {"type": "string", "format": "date-time"},
                         "avatar": {"type": "string"},
                         "discord_id": {"type": "integer"},
                         "permissions": {
