@@ -39,13 +39,14 @@ class ApiAuthController(MethodView):
             decode = dec()
             payload = decode
             decode.pop("exp")
-            payload["permissions_str"] = decode.get("permissions", "")
+            permissions_str = decode.get("permissions", "")
             payload["permissions"] = decode.get("permissions", "").upper().strip().split("|")
             user = User(**payload)
             user.validate()
             user.save()
             token = create(user.public_id)
-            payload["public_id"] = user.public_idd
+            payload["permissions_str"] = permissions_str
+            payload["public_id"] = user.public_id
             end_data = {"token": token, "user": payload}
             return jsonify(end_data), 200
         except ValidationError as err:
