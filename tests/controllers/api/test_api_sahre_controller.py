@@ -13,7 +13,7 @@ class TestApiController:
 
     def test_get_playlists_with_pagination_page_not_found_should_be_return_404(self, login_token_header, client, user,
                                                                                playlists):
-        rq = client.get("/api/share/playlist?page=24", headers=login_token_header)
+        rq = client.get("/api/share/playlist/24", headers=login_token_header)
 
         assert rq.status_code == 404
 
@@ -85,7 +85,7 @@ class TestApiSongController:
 
     def test_get_playlists_with_pagination_page_not_found_should_be_return_404(self, login_token_header, client, user,
                                                                                songs):
-        rq = client.get("/api/share/songs?page=24", headers=login_token_header)
+        rq = client.get("/api/share/songs/24", headers=login_token_header)
 
         assert rq.status_code == 404
 

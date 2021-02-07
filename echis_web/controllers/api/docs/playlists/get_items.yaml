@@ -11,7 +11,7 @@ parameters:
     required: True
   - name: Page
     type: integer
-    in: query
+    in: path
 definitions:
   Playlist:
     type: object

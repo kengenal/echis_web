@@ -11,13 +11,12 @@ class ApiPlaylistController(MethodView):
     has_perm_for_methods = ["POST", "PUT", "DELETE"]
     decorators = [has_perm_api(permissions=["ADMIN"], methods=has_perm_for_methods), login_required_api]
 
-    def get(self):
+    def get(self, page=1):
         """
         file: docs/playlists/get_items.yaml
         """
         try:
-            page = request.args.get("page", 1)
-            playlists = Playlists.objects.paginate(page=int(page), per_page=current_app.config["PAGINATION"])
+            playlists = Playlists.objects.paginate(page=page, per_page=current_app.config["PAGINATION"])
             return jsonify({
                 "results": playlists.total,
                 "page": page,
@@ -78,13 +77,12 @@ class ApiSongController(MethodView):
     has_perm_for_methods = ["DELETE"]
     decorators = [has_perm_api(permissions=["ADMIN"], methods=has_perm_for_methods), login_required_api]
 
-    def get(self):
+    def get(self, page=1):
         """
         file: docs/songs/get_items.yaml
         """
         try:
-            page = request.args.get("page", 1)
-            songs = SharedSongs.objects.paginate(page=int(page), per_page=current_app.config["PAGINATION"])
+            songs = SharedSongs.objects.paginate(page=page, per_page=current_app.config["PAGINATION"])
             return jsonify({
                 "results": songs.total,
                 "page": page,

@@ -32,6 +32,7 @@ api_login = {
                                 "type": "string"
                             }
                         },
+                        "permissions_str": {"type": "string"},
                         "public_id": {"type": "string"},
                         "username": {"type": "string"},
                     },

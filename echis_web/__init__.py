@@ -89,7 +89,12 @@ def route(app):
         methods=["GET", "POST"]
     )
     app.add_url_rule(
-        "/api/share/playlist/<playlist_id>",
+        "/api/share/playlist/<int:page>",
+        view_func=ApiPlaylistController.as_view("share_playlist_pag"),
+        methods=["GET"]
+    )
+    app.add_url_rule(
+        "/api/share/playlist/<string:playlist_id>",
         view_func=ApiPlaylistController.as_view("share_playlist_parameter"),
         methods=["PUT", "DELETE"]
     )
@@ -101,7 +106,12 @@ def route(app):
         methods=["GET"]
     )
     app.add_url_rule(
-        "/api/share/songs/<record_id>",
+        "/api/share/songs/<int:page>",
+        view_func=ApiSongController.as_view("share_songs_pagination"),
+        methods=["GET"]
+    )
+    app.add_url_rule(
+        "/api/share/songs/<string:record_id>",
         view_func=ApiSongController.as_view("share_songs_parameter"),
         methods=["DELETE"]
     )
