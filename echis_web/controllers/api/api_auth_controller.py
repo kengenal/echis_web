@@ -38,6 +38,7 @@ class ApiAuthController(MethodView):
         try:
             decode = dec()
             payload = decode
+            exp = decode.get("exp")
             decode.pop("exp")
             permissions_str = decode.get("permissions", "")
             payload["permissions"] = decode.get("permissions", "").upper().strip().split("|")
@@ -46,6 +47,7 @@ class ApiAuthController(MethodView):
             user.save()
             token = create(user.public_id)
             payload["permissions_str"] = permissions_str
+            payload["exp"] = exp
             payload["public_id"] = user.public_id
             end_data = {"token": token, "user": payload}
             return jsonify(end_data), 200
