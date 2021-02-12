@@ -7,7 +7,7 @@ export default function Table({
   items,
   headers,
 }: {
-  items: any[][];
+  items: any[];
   headers: string[];
 }) {
   return (
@@ -22,11 +22,14 @@ export default function Table({
         </tr>
       </thead>
       <tbody className="table__body">
-        {items.map((item: string[], i: number) => (
+        {items.map((item: any, i: number) => (
           <tr className="table__row" key={`${i}tr`}>
-            {item.map((row: string, j: number) => (
-              <td key={`${j}td`} className="table__cell">
-                {row}
+            <td className="table__cell">{i}</td>
+            {Object.keys(item).map((key, index) => (
+              <td key={item[key] + index} className="table__cell">
+                {typeof item[key] === "object"
+                  ? Object.values(item[key])[0]
+                  : item[key]}
               </td>
             ))}
           </tr>

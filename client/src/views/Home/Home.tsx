@@ -5,24 +5,18 @@ import "./Home.scss";
 import MaterialIcon from "@material/react-material-icon";
 import { useFetch } from "react-async";
 import enviromant from "../../enviroment";
-
-function splitPermission(permissions: string[]) {
-  let string = "";
-
-  for (const permission of permissions ?? []) {
-    string += `${permission}|`;
-  }
-
-  return string;
-}
+import UserData from "./Home.model";
 
 export default function Home() {
   const { token }: { token: string } = useParams();
-  const { data, error } = useFetch<any>(`${enviromant.API_URL}/auth`, {
+  const { data, error } = useFetch<UserData>(`${enviromant.API_URL}/auth`, {
     headers: { Authorization: `Bearer ${token}`, accept: "application/json" },
   });
 
   if (error) throw error;
+
+  localStorage.setItem("user_token", data?.token ?? "");
+  localStorage.setItem("user_img", data?.user?.avatar ?? "");
 
   return (
     <>
@@ -48,7 +42,7 @@ export default function Home() {
               <MaterialIcon icon="perm_identity" title="discord_id" />
               <strong className="card__list-label">permissions:</strong>
               <span className="card__list-txt">
-                {splitPermission(data?.user?.permissions)}
+                {data?.user?.permissions_str ?? ""}
               </span>
             </li>
 
@@ -61,7 +55,7 @@ export default function Home() {
             <li className="card__list-item">
               <MaterialIcon icon="schedule" title="discord_id" />
               <strong className="card__list-label">exp:</strong>
-              <span className="card__list-txt">1611064031</span>
+              <span className="card__list-txt">{data?.user?.exp}</span>
             </li>
           </ul>
         </div>

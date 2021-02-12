@@ -6,6 +6,8 @@ import "./Navigation.scss";
 import Dropdown from "../Dropdown/Dropdown";
 
 export default function Navigation() {
+  const image = localStorage.getItem("user_img") ?? "";
+
   const dropdownShare = {
     header: {
       label: "Share",
@@ -19,8 +21,7 @@ export default function Navigation() {
 
   const dropdownAccound = {
     header: {
-      image:
-        "https://cdn.discordapp.com/avatars/301796703277940737/c88c68adcb5b04db54ee1a8eb6081fc0.webp?size=1024",
+      image,
     },
     items: [{ link: "/account/logout", label: "Logout", icon: "exit_to_app" }],
   };
