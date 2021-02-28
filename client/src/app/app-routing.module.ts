@@ -12,6 +12,10 @@ const routes: Routes = [
     path: 'home',
     loadChildren: './home/home.module#HomeModule',
   },
+  {
+    path: 'share',
+    loadChildren: './share/share.module#ShareModule',
+  },
   { path: '**', redirectTo: '/404' },
   { path: '404', component: NotFoundComponent },
 ];
