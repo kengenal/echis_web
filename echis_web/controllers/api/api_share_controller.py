@@ -13,7 +13,7 @@ class ApiPlaylistController(MethodView):
 
     def get(self, page=1):
         """
-        file: docs/playlists/get_items.yaml
+        file: docs/playlists/get_playlists_items.yaml
         """
         try:
             playlists = Playlists.objects.paginate(page=page, per_page=current_app.config["PAGINATION"])

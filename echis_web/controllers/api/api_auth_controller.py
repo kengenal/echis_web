@@ -38,8 +38,7 @@ class ApiAuthController(MethodView):
         try:
             decode = dec()
             payload = decode
-            exp = decode.get("exp")
-            decode.pop("exp")
+            exp = decode.get("exp") if "exp" in decode.keys() else None
             permissions_str = decode.get("permissions", "")
             payload["permissions"] = decode.get("permissions", "").upper().strip().split("|")
             user = User(**payload)
