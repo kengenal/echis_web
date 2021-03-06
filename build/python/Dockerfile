@@ -17,6 +17,8 @@ RUN adduser -Ds /bin/ash flask
 RUN chown -R flask:flask /app
 RUN chmod 755 /app
 
+ENV CRYPTOGRAPHY_DONT_BUILD_RUST=1
+RUN pip install -U pip
 RUN pip install poetry
 
 COPY ./pyproject.toml pyproject.toml

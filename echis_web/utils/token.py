@@ -28,10 +28,12 @@ def create_token(data, exp=50, options=None):
         options = {}
     get_secret = options.get("TOKEN_SECRET", "asdasdasd")
     get_alg = options.get("TOKEN_ALGORITHM", "HS256")
+    debug = options.get("FLASK_DEBUG", 0)
     payload = data
     if not data:
         raise Exception("Data cannot be null")
-    payload["exp"] = datetime.utcnow() + timedelta(minutes=exp)
+    if debug == 1:
+        payload["exp"] = datetime.utcnow() + timedelta(minutes=exp)
     token = jwt.encode(payload, get_secret, algorithm=get_alg).decode("UTF-8")
     return token
 
