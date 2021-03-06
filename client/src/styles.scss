@@ -3,7 +3,28 @@
 @import "../node_modules/primeng/resources/themes/luna-blue/theme.css";
 @import "../node_modules/primeng/resources/primeng.min.css";
 
-body {
+html,
+body,
+div,
+table,
+caption,
+tbody,
+tfoot,
+thead,
+tr,
+th,
+td {
   margin: 0;
   padding: 0;
+  border: 0;
+  font-size: 100%;
+  font: inherit;
+  table-layout: fixed;
+  border-spacing: inherit;
+  vertical-align: baseline;
+  font-family: "Roboto", "Arial", sans-serif;
+}
+
+img {
+  max-width: 100%;
 }

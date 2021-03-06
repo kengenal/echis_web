@@ -1,7 +1,33 @@
-<div class="containter">
-  <img
-    src="https://cdn.discordapp.com/avatars/301796703277940737/c88c68adcb5b04db54ee1a8eb6081fc0.webp?size=1024"
-    alt="discord avatar"
-  />
-  <h1>Welcome Undero</h1>
+<div class="containter" *ngIf="userData && userData.user">
+  <img src="{{ userData.user.avatar }}" alt="discord avatar" class="containter__image" />
+  <h1 class="containter__header">Welcome {{ userData.user.username }}</h1>
+  <div class="card">
+    <h2 class="card__header">Your data</h2>
+    <ul class="card__list">
+      <li class="card__list-item">
+        <strong class="card__list-label">discord_id:</strong>
+        <span class="card__list-txt">{{ userData.user.discord_id }}</span>
+      </li>
+
+      <li class="card__list-item">
+        <strong class="card__list-label">username:</strong>
+        <span class="card__list-txt">{{ userData.user.username }}</span>
+      </li>
+
+      <li class="card__list-item">
+        <strong class="card__list-label">permissions:</strong>
+        <span class="card__list-txt"> {{ userData.user.permissions_str }} </span>
+      </li>
+
+      <li class="card__list-item">
+        <strong class="card__list-label">avatar:</strong>
+        <span class="card__list-txt">{{ userData.user.avatar }}</span>
+      </li>
+
+      <li class="card__list-item">
+        <strong class="card__list-label">exp:</strong>
+        <span class="card__list-txt">{{ userData.user.exp }}</span>
+      </li>
+    </ul>
+  </div>
 </div>
