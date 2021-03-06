@@ -1,4 +1,4 @@
-export default interface SongsData {
+export default interface ResponseSongsData {
   songs: {
     _id?: string;
     added_by: string;

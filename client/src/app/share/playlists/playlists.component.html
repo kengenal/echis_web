@@ -1,1 +1,31 @@
-<p>playlists works!</p>
+<p-table
+  [value]="playlistData.playlists"
+  [lazy]="true"
+  (onPage)="onPage($event)"
+  class="p-datatable-responsive"
+  [paginator]="true"
+  [rows]="10"
+  [totalRecords]="playlistData.results"
+>
+  <ng-template pTemplate="header">
+    <tr>
+      <th>Api</th>
+      <th>Created At</th>
+      <th>Is active</th>
+      <th>Playlist ID</th>
+      <th>Record ID</th>
+      <th>Added By</th>
+    </tr>
+  </ng-template>
+  <ng-template pTemplate="body" let-playlist>
+    <tr>
+      <td>{{ playlist.api }}</td>
+      <td *ngIf="isNumber(playlist.created_at.$date)">{{ playlist.created_at.$date | date: "dd/MM/yyyy" }}</td>
+      <td *ngIf="!isNumber(playlist.created_at.$date)">{{ playlist.created_at.$date }}</td>
+      <td>{{ playlist.is_active }}</td>
+      <td>{{ playlist.playlist_id }}</td>
+      <td>{{ playlist.record_id.$uuid }}</td>
+      <td>{{ playlist.user }}</td>
+    </tr>
+  </ng-template>
+</p-table>

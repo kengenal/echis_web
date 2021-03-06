@@ -19,12 +19,12 @@ export class NavbarComponent implements OnInit {
           {
             label: 'Playlist',
             icon: 'pi pi-fw pi-plus',
-            routerLink: '/share/playlists',
+            routerLink: '/share/playlists/1',
           },
           {
             label: 'Songs',
             icon: 'pi pi-fw pi-plus',
-            routerLink: '/share/songs',
+            routerLink: '/share/songs/1',
           },
         ],
       },

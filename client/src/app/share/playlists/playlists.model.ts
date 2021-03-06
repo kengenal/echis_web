@@ -1,4 +1,4 @@
-export default interface PlaylistData {
+export default interface ResponsePlaylistData {
   playlists: {
     api: string;
     created_at: string;
