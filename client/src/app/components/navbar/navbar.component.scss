@@ -1,0 +1,13 @@
+$menubar-height: 90px;
+
+::ng-deep {
+  .p-menubar {
+    border-radius: 0;
+    min-height: $menubar-height;
+
+    &-image {
+      border-radius: 50%;
+      max-height: $menubar-height - 10px;
+    }
+  }
+}

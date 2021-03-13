@@ -1,0 +1,37 @@
+<p-table [value]="songstData.songs" [lazy]="true" (onPage)="onPage($event)" styleClass="p-datatable-responsive" [paginator]="true" [rows]="10" [totalRecords]="songstData.results">
+  <ng-template pTemplate="header">
+    <tr>
+      <th>Title</th>
+      <th>Album</th>
+      <th>Artist</th>
+      <th>Rank</th>
+      <th>Added to playlist</th>
+      <th>Api</th>
+      <th>Added by</th>
+      <th>Cover</th>
+      <th>Created at</th>
+      <th>Is shared</th>
+      <th>Playlist ID</th>
+      <th>Record ID</th>
+      <th>Song ID</th>
+    </tr>
+  </ng-template>
+  <ng-template pTemplate="body" let-songs let-columns="columns">
+    <tr>
+      <td>{{ songs.title }}</td>
+      <td>{{ songs.album }}</td>
+      <td>{{ songs.artist }}</td>
+      <td>{{ songs.rank }}</td>
+      <td>{{ songs.added_to_playlist }}</td>
+      <td>{{ songs.api }}</td>
+      <td>{{ songs.added_by }}</td>
+      <td>{{ songs.cover }}</td>
+      <td *ngIf="isNumber(songs.created_at.$date)">{{ songs.created_at.$date | date: "dd/MM/yyyy" }}</td>
+      <td *ngIf="!isNumber(songs.created_at.$date)">{{ songs.created_at.$date }}</td>
+      <td>{{ songs.is_shared }}</td>
+      <td>{{ songs.playlist_id }}</td>
+      <td>{{ songs.record_id.$uuid }}</td>
+      <td>{{ songs.song_id }}</td>
+    </tr>
+  </ng-template>
+</p-table>
