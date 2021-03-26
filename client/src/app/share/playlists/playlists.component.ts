@@ -31,18 +31,18 @@ export class PlaylistsComponent implements OnInit {
     return typeof timestamp === 'number';
   }
 
-  showDialog() {
+  showDialog(): void {
     this.displayModal = true;
   }
 
-  updateData(target: any) {
+  updateData(target: any): void {
     const name = target.name as string;
     const value = target.value as string | boolean;
 
     this.createdForm[name] = value;
   }
 
-  onSubmitCreate(e: Event) {
+  onSubmitCreate(e: Event): void {
     e.preventDefault();
     const token = localStorage.getItem(environment.USER_TOKEN_NAME);
 
@@ -66,7 +66,7 @@ export class PlaylistsComponent implements OnInit {
       });
   }
 
-  editItem(playlistID: string, checked: boolean) {
+  editItem(playlistID: string, checked: boolean): void {
     const token = localStorage.getItem(environment.USER_TOKEN_NAME);
 
     this.http
@@ -94,7 +94,7 @@ export class PlaylistsComponent implements OnInit {
       });
   }
 
-  deleteItem(playlistID: string) {
+  deleteItem(playlistID: string): void {
     const token = localStorage.getItem(environment.USER_TOKEN_NAME);
 
     this.http

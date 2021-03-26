@@ -24,7 +24,7 @@ export class SongsComponent implements OnInit {
     return typeof timestamp === 'number';
   }
 
-  deleteItem(recordID: string) {
+  deleteItem(recordID: string): void {
     const token = localStorage.getItem(environment.USER_TOKEN_NAME);
 
     this.http
