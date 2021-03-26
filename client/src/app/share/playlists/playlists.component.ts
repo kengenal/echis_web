@@ -42,7 +42,7 @@ export class PlaylistsComponent implements OnInit {
     this.createdForm[name] = value;
   }
 
-  onSubmit(e: Event) {
+  onSubmitCreate(e: Event) {
     e.preventDefault();
     const token = localStorage.getItem(environment.USER_TOKEN_NAME);
 
@@ -63,6 +63,34 @@ export class PlaylistsComponent implements OnInit {
         this.playlistData.playlists.push(JSON.parse(response));
         this.displayModal = false;
         this.cd.detectChanges();
+      });
+  }
+
+  editItem(playlistID: string, checked: boolean) {
+    const token = localStorage.getItem(environment.USER_TOKEN_NAME);
+
+    this.http
+      .put(
+        `${environment.API_URL}/share/playlist/${playlistID}`,
+        {
+          is_active: checked,
+        },
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+            accept: 'application/json',
+          },
+        }
+      )
+      .subscribe(() => {
+        setTimeout(() => {
+          this.resolver.resolve(this.route.snapshot).subscribe(() =>
+            setTimeout(() => {
+              this.playlistData = this.route.snapshot.data as ResponsePlaylistData;
+              this.cd.detectChanges();
+            }, 100)
+          );
+        }, 100);
       });
   }
 

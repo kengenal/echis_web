@@ -9,9 +9,10 @@ import { ButtonModule } from 'primeng/button';
 import { InputTextModule } from 'primeng/inputtext';
 import { MultiSelectModule } from 'primeng/multiselect';
 import { InputSwitchModule } from 'primeng/inputswitch';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [SongsComponent, PlaylistsComponent],
-  imports: [CommonModule, ShareRoutingModule, TableModule, DialogModule, ButtonModule, InputTextModule, MultiSelectModule, InputSwitchModule],
+  imports: [CommonModule, ShareRoutingModule, TableModule, DialogModule, ButtonModule, InputTextModule, MultiSelectModule, InputSwitchModule, FormsModule, ReactiveFormsModule],
 })
 export class ShareModule {}
