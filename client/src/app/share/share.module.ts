@@ -4,9 +4,14 @@ import { CommonModule } from '@angular/common';
 import { SongsComponent } from './songs/songs.component';
 import { PlaylistsComponent } from './playlists/playlists.component';
 import { TableModule } from 'primeng/table';
+import { DialogModule } from 'primeng/dialog';
+import { ButtonModule } from 'primeng/button';
+import { InputTextModule } from 'primeng/inputtext';
+import { MultiSelectModule } from 'primeng/multiselect';
+import { InputSwitchModule } from 'primeng/inputswitch';
 
 @NgModule({
   declarations: [SongsComponent, PlaylistsComponent],
-  imports: [CommonModule, ShareRoutingModule, TableModule],
+  imports: [CommonModule, ShareRoutingModule, TableModule, DialogModule, ButtonModule, InputTextModule, MultiSelectModule, InputSwitchModule],
 })
 export class ShareModule {}

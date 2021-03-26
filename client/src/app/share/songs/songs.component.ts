@@ -2,6 +2,8 @@ import { SongsResolver } from './guard/songs.resolver';
 import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import ResponseSongsData from './songs.model';
+import { HttpClient } from '@angular/common/http';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-songs',
@@ -11,7 +13,7 @@ import ResponseSongsData from './songs.model';
 export class SongsComponent implements OnInit {
   songstData: ResponseSongsData;
 
-  constructor(private route: ActivatedRoute, private router: Router, private resolver: SongsResolver, private cd: ChangeDetectorRef) {}
+  constructor(private route: ActivatedRoute, private router: Router, private resolver: SongsResolver, private cd: ChangeDetectorRef, private http: HttpClient) {}
 
   ngOnInit(): void {
     this.songstData = this.route.snapshot.data as ResponseSongsData;
@@ -20,6 +22,17 @@ export class SongsComponent implements OnInit {
 
   isNumber(timestamp: number | string): boolean {
     return typeof timestamp === 'number';
+  }
+
+  deleteItem(recordID: string) {
+    this.http.delete(`${environment.API_URL}/share/songs/${recordID}`).subscribe(() => {
+      this.resolver.resolve(this.route.snapshot).subscribe(() =>
+        setTimeout(() => {
+          this.songstData = this.route.snapshot.data as ResponseSongsData;
+          this.cd.detectChanges();
+        }, 100)
+      );
+    });
   }
 
   onPage({ first }: { first: number }): void {
