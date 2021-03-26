@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { MenuItem } from 'primeng/api';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-navbar',
@@ -9,7 +11,7 @@ import { MenuItem } from 'primeng/api';
 export class NavbarComponent implements OnInit {
   items: MenuItem[] = [];
 
-  constructor() {}
+  constructor(private router: Router) {}
 
   ngOnInit(): void {
     this.items = [
@@ -29,5 +31,11 @@ export class NavbarComponent implements OnInit {
         ],
       },
     ];
+  }
+
+  logout(): void {
+    console.log('test');
+    localStorage.removeItem(environment.USER_TOKEN_NAME);
+    this.router.navigateByUrl('/404');
   }
 }

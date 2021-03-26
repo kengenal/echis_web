@@ -25,14 +25,23 @@ export class SongsComponent implements OnInit {
   }
 
   deleteItem(recordID: string) {
-    this.http.delete(`${environment.API_URL}/share/songs/${recordID}`).subscribe(() => {
-      this.resolver.resolve(this.route.snapshot).subscribe(() =>
-        setTimeout(() => {
-          this.songstData = this.route.snapshot.data as ResponseSongsData;
-          this.cd.detectChanges();
-        }, 100)
-      );
-    });
+    const token = localStorage.getItem(environment.USER_TOKEN_NAME);
+
+    this.http
+      .delete(`${environment.API_URL}/share/songs/${recordID}`, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+          accept: 'application/json',
+        },
+      })
+      .subscribe(() => {
+        this.resolver.resolve(this.route.snapshot).subscribe(() =>
+          setTimeout(() => {
+            this.songstData = this.route.snapshot.data as ResponseSongsData;
+            this.cd.detectChanges();
+          }, 100)
+        );
+      });
   }
 
   onPage({ first }: { first: number }): void {

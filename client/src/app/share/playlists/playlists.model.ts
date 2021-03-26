@@ -1,4 +1,5 @@
 export default interface ResponsePlaylistData {
+  api_available: { name: string; value: string }[];
   playlists: {
     api: string;
     created_at: string;
