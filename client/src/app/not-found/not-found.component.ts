@@ -9,5 +9,7 @@ import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 export class NotFoundComponent implements OnInit {
   constructor() {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    document.querySelector('html')?.classList.add('not-found');
+  }
 }

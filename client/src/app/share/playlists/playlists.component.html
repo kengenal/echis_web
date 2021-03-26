@@ -1,31 +1,69 @@
-<p-table
-  [value]="playlistData.playlists"
-  [lazy]="true"
-  (onPage)="onPage($event)"
-  class="p-datatable-responsive"
-  [paginator]="true"
-  [rows]="10"
-  [totalRecords]="playlistData.results"
->
-  <ng-template pTemplate="header">
-    <tr>
-      <th>Api</th>
-      <th>Created At</th>
-      <th>Is active</th>
-      <th>Playlist ID</th>
-      <th>Record ID</th>
-      <th>Added By</th>
-    </tr>
-  </ng-template>
-  <ng-template pTemplate="body" let-playlist>
-    <tr>
-      <td>{{ playlist.api }}</td>
-      <td *ngIf="isNumber(playlist.created_at.$date)">{{ playlist.created_at.$date | date: "dd/MM/yyyy" }}</td>
-      <td *ngIf="!isNumber(playlist.created_at.$date)">{{ playlist.created_at.$date }}</td>
-      <td>{{ playlist.is_active }}</td>
-      <td>{{ playlist.playlist_id }}</td>
-      <td>{{ playlist.record_id.$uuid }}</td>
-      <td>{{ playlist.user }}</td>
-    </tr>
-  </ng-template>
-</p-table>
+<!-- Dialog - create playlist -->
+<p-dialog header="Create Your Playlist" [(visible)]="displayModal" [modal]="true" [contentStyle]="{ width: '300px', height: '400px' }">
+  <form (submit)="onSubmitCreate($event)">
+    <div class="p-fluid">
+      <div class="p-field">
+        <label for="playlist_id">PlaylistID</label>
+        <input pInputText name="playlist_id" id="playlist_id" type="text" pInputText (change)="updateData($event.target)" />
+      </div>
+      <div class="p-field">
+        <label for="API">API</label>
+        <p-multiSelect
+          [options]="playlistData.api_available"
+          (onChange)="updateData({ name: 'api', value: $event.value[0].value })"
+          optionLabel="name"
+          [maxSelectedLabels]="1"
+          [selectionLimit]="1"
+          inputId="API"
+        ></p-multiSelect>
+      </div>
+      <div class="p-field">
+        <label for="isActive">Active</label><br />
+        <p-inputSwitch inputId="isActive" (onChange)="updateData({ name: 'is_active', value: $event.checked })"></p-inputSwitch>
+      </div>
+      <button pButton type="submit" label="Save"></button>
+    </div>
+  </form>
+</p-dialog>
+
+<!-- Table -->
+<div class="container">
+  <div class="container__header">
+    <h1>Playlist</h1>
+    <button pButton type="button" (click)="showDialog()" label="Create Playlist"></button>
+  </div>
+
+  <p-table
+    [value]="playlistData.playlists"
+    [lazy]="true"
+    (onPage)="onPage($event)"
+    class="p-datatable-responsive"
+    [paginator]="true"
+    [rows]="10"
+    [totalRecords]="playlistData.results"
+  >
+    <ng-template pTemplate="header">
+      <tr>
+        <th>Api</th>
+        <th>Playlist ID</th>
+        <th>Created At</th>
+        <th>Is active</th>
+        <th>Added By</th>
+        <th>Actions</th>
+      </tr>
+    </ng-template>
+    <ng-template pTemplate="body" let-playlist>
+      <tr>
+        <td>{{ playlist.api }}</td>
+        <td>{{ playlist.playlist_id }}</td>
+        <td *ngIf="isNumber(playlist.created_at.$date)">{{ playlist.created_at.$date | date: "dd/MM/yyyy" }}</td>
+        <td *ngIf="!isNumber(playlist.created_at.$date)">{{ playlist.created_at.$date }}</td>
+        <td><p-inputSwitch [(ngModel)]="playlist.is_active" (onChange)="editItem(playlist.playlist_id, $event.checked)"></p-inputSwitch></td>
+        <td>{{ playlist.user }}</td>
+        <td>
+          <button pButton (click)="deleteItem(playlist.playlist_id)" icon="pi pi-trash"></button>
+        </td>
+      </tr>
+    </ng-template>
+  </p-table>
+</div>

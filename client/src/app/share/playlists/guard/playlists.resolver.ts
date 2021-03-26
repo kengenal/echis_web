@@ -25,6 +25,10 @@ export class PlaylistsResolver implements Resolve<boolean> {
       })
       .pipe(
         map((response) => {
+          response.api_available = (response as any).api_available.map((api: string) => ({
+            name: api,
+            value: api,
+          }));
           route.data = response;
           return true;
         }),
