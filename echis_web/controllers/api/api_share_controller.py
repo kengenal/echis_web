@@ -1,6 +1,6 @@
 from flask import request, current_app, jsonify
 from flask.views import MethodView
-from mongoengine import ValidationError
+from mongoengine import ValidationError, NotUniqueError
 
 from echis_web.exception.exceptions import NotFoundException, BadRequestException
 from echis_web.model.share_model import Playlists, SharedSongs
@@ -37,9 +37,11 @@ class ApiPlaylistController(MethodView):
             playlist = Playlists(**rq)
             playlist.validate()
             playlist.save()
-            return jsonify(playlist.to_json()), 201
+            return jsonify(playlist), 201
         except ValidationError as err:
             raise BadRequestException(err.to_dict())
+        except NotUniqueError:
+            raise BadRequestException({"playlist_id": "Playlist already exist"})
 
     @staticmethod
     def put(playlist_id):
@@ -47,14 +49,14 @@ class ApiPlaylistController(MethodView):
         file: docs/playlists/update_item.yaml
         """
         try:
-            rq = request.get_json()
-            playlist = Playlists.objects.get_or_404(playlist_id=playlist_id)
-            playlist.update(
-                set__playlist_id=rq.get("playlist_id"),
-                set__api=rq.get("api"),
-                set__is_active=rq.get("is_active"),
-            )
-            return jsonify(playlist.to_json())
+            active = request.get_json().get('is_active')
+            if active is not None:
+                playlist = Playlists.objects.get_or_404(playlist_id=playlist_id)
+                playlist.update(
+                    set__is_active=active,
+                )
+                return jsonify(playlist.to_json())
+            raise ValidationError(errors={"is_active": "Cannot be empty"})
         except ValidationError as err:
             raise BadRequestException(err.to_dict())
         except Exception:

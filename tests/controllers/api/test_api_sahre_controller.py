@@ -25,8 +25,20 @@ class TestApiController(BaseTokenSetup):
         }
 
         rq = self.client.post("/api/share/playlist", json=payload, headers=self.auth_header)
+        print(rq.data)
         assert rq.status_code == 201
         assert b"playlist_id" in rq.data
+
+    def test_create_playlist_with_duplicate_key_should_be_return_400_with_message(self, playlists):
+        payload = {
+            "playlist_id": playlists.playlist_id,
+            "api": playlists.api,
+            "is_active": playlists.is_active
+        }
+        rq = self.client.post("/api/share/playlist", json=payload, headers=self.auth_header)
+
+        assert rq.status_code == 400
+        assert b'playlist_id' in rq.data
 
     def test_post_create_playlist_without_playlist_id_should_be_return_400(self, playlists):
         payload = {
@@ -39,8 +51,6 @@ class TestApiController(BaseTokenSetup):
 
     def test_update_playlist_should_be_return_200(self, playlists):
         payload = {
-            "playlist_id": str(uuid.uuid4()),
-            "api": "spotify",
             "is_active": False
         }
 
@@ -52,11 +62,10 @@ class TestApiController(BaseTokenSetup):
 
     def test_update_without_data_should_be_return_400(self, playlists):
         rq = self.client.put(
-            f"/api/share/playlist/{playlists.playlist_id}",
+            f"/api/share/playlist/{str(playlists.playlist_id)}",
             json={},
             headers=self.auth_header
         )
-
         assert rq.status_code == 400
 
     def test_update_incorrect_id_should_be_return_400(self, playlists):
