@@ -9,6 +9,11 @@ const routes: Routes = [
     component: HomeComponent,
     canActivate: [HomeGuard],
   },
+  {
+    path: '',
+    component: HomeComponent,
+    canActivate: [HomeGuard],
+  },
 ];
 
 @NgModule({

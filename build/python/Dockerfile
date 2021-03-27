@@ -1,5 +1,5 @@
 # Python build stage
-FROM python:3.8.6-alpine3.12
+FROM python:3.8.8-alpine3.12
 
 ENV PYTHONUNBUFFERED 1
 

@@ -14,6 +14,11 @@ export class HomeGuard implements CanActivate {
   canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<boolean> {
     const { id } = route.params;
 
+    if (!id) {
+      this.router.navigate(['/404']);
+      return of(false);
+    }
+
     return this.http
       .get<ResponseUserData>(`${environment.API_URL}/auth`, {
         headers: {
