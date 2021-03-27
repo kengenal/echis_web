@@ -5,7 +5,7 @@ description = ""
 authors = ["kengenal"]
 
 [tool.poetry.dependencies]
-python = "^3.8"
+python = "^3.8.8"
 Flask = "^1.1.2"
 flask-mongoengine = "^1.0.0"
 PyJWT = "^1.7.1"

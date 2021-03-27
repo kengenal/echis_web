@@ -1,8 +1,8 @@
 class TestAuth:
-    def test_auth_validate_data_should_be_redirect_to_home(self, client, token):
-        rq = client.get(f"/auth/{token}")
-
-        assert rq.status_code == 302
+    # def test_auth_validate_data_should_be_redirect_to_home(self, client, token):
+    #     rq = client.get(f"/auth/{token}")
+    #
+    #     assert rq.status_code == 302
 
     def test_auth_invalid_token_should_be_return_404(self, client, token):
         rq = client.get(f"/auth/{token}asdasdasd")

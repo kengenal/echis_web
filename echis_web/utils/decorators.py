@@ -5,7 +5,7 @@ from flask import session, abort, redirect, url_for, request, g
 
 from echis_web.exception.exceptions import UnauthorizedException, ForbiddenException
 from echis_web.model.user_model import User
-from echis_web.utils.token import decode_token
+from echis_web.utils.token import token_app_decoder
 
 
 def get_404():
@@ -31,7 +31,7 @@ def login_required(func):
 def has_perms(perms, rd=None):
     """
     check user permission, this function get from session["permissions"] and optional url to redirect user where
-    you wont if rq parameter is none decorator abord 404
+    you wont if rq parameter is none decorator raise 404
     """
 
     def decorator(func):
@@ -65,16 +65,14 @@ def login_required_api(func):
 
     @wraps(func)
     def wrapper_func(*args, **kwargs):
-        if token := request.headers.get("Authorization", None):
-            clear_token = token.replace("Bearer", "").strip()
-            try:
-                token_decode = decode_token(clear_token)
-                get_user = User.get_user_or_rise_exception(public_id=token_decode.get("public_id", None))
-                g.user = get_user
-            except jwt.PyJWTError:
-                raise UnauthorizedException()
-            except Exception:
-                raise UnauthorizedException()
+        try:
+            token_decode = token_app_decoder()
+            get_user = User.get_user_or_rise_exception(public_id=token_decode.get("public_id", None))
+            g.user = get_user
+        except jwt.PyJWTError:
+            raise UnauthorizedException()
+        except Exception:
+            raise UnauthorizedException()
         return func(*args, **kwargs)
 
     return wrapper_func
