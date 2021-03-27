@@ -25,8 +25,20 @@ class TestApiController(BaseTokenSetup):
         }
 
         rq = self.client.post("/api/share/playlist", json=payload, headers=self.auth_header)
+        print(rq.data)
         assert rq.status_code == 201
         assert b"playlist_id" in rq.data
+
+    def test_create_playlist_with_duplicate_key_should_be_return_400_with_message(self, playlists):
+        payload = {
+            "playlist_id": playlists.playlist_id,
+            "api": playlists.api,
+            "is_active": playlists.is_active
+        }
+        rq = self.client.post("/api/share/playlist", json=payload, headers=self.auth_header)
+
+        assert rq.status_code == 400
+        assert b'playlist_id' in rq.data
 
     def test_post_create_playlist_without_playlist_id_should_be_return_400(self, playlists):
         payload = {
