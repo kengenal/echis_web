@@ -60,7 +60,7 @@ export class PlaylistsComponent implements OnInit {
         }
       )
       .subscribe((response: any) => {
-        this.playlistData.playlists.push(JSON.parse(response));
+        this.playlistData.playlists.push(response);
         this.displayModal = false;
         this.cd.detectChanges();
       });
