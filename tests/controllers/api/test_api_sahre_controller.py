@@ -39,8 +39,6 @@ class TestApiController(BaseTokenSetup):
 
     def test_update_playlist_should_be_return_200(self, playlists):
         payload = {
-            "playlist_id": str(uuid.uuid4()),
-            "api": "spotify",
             "is_active": False
         }
 
@@ -52,11 +50,10 @@ class TestApiController(BaseTokenSetup):
 
     def test_update_without_data_should_be_return_400(self, playlists):
         rq = self.client.put(
-            f"/api/share/playlist/{playlists.playlist_id}",
+            f"/api/share/playlist/{str(playlists.playlist_id)}",
             json={},
             headers=self.auth_header
         )
-
         assert rq.status_code == 400
 
     def test_update_incorrect_id_should_be_return_400(self, playlists):

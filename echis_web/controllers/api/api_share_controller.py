@@ -47,14 +47,14 @@ class ApiPlaylistController(MethodView):
         file: docs/playlists/update_item.yaml
         """
         try:
-            rq = request.get_json()
-            playlist = Playlists.objects.get_or_404(playlist_id=playlist_id)
-            playlist.update(
-                set__playlist_id=rq.get("playlist_id"),
-                set__api=rq.get("api"),
-                set__is_active=rq.get("is_active"),
-            )
-            return jsonify(playlist.to_json())
+            active = request.get_json().get('is_active')
+            if active is not None:
+                playlist = Playlists.objects.get_or_404(playlist_id=playlist_id)
+                playlist.update(
+                    set__is_active=active,
+                )
+                return jsonify(playlist.to_json())
+            raise ValidationError(field_name="is_active", message="Cannot be empty")
         except ValidationError as err:
             raise BadRequestException(err.to_dict())
         except Exception:
