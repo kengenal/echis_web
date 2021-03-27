@@ -40,8 +40,6 @@ services:
       MONGO_URL: mongodb://root:example@mongo:27017/admin
       TOKEN_ALGORITHM: HS512
       TOKEN_SECRET: asmklasfhiudhfiu
-    ports:
-      - 5000:5000
     labels:
       - "traefik.enable=true"
       - "traefik.http.routers.python.rule=Host(`discord.docker.localhost`) && PathPrefix(`/api`)"
