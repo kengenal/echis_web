@@ -54,7 +54,7 @@ class ApiPlaylistController(MethodView):
                     set__is_active=active,
                 )
                 return jsonify(playlist.to_json())
-            raise ValidationError(field_name="is_active", message="Cannot be empty")
+            raise ValidationError(errors={"is_active": "Cannot be empty"})
         except ValidationError as err:
             raise BadRequestException(err.to_dict())
         except Exception:
