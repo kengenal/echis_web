@@ -69,8 +69,7 @@ def login_required_api(func):
             token_decode = token_app_decoder()
             get_user = User.get_user_or_rise_exception(public_id=token_decode.get("public_id", None))
             g.user = get_user
-        except jwt.PyJWTError as err:
-            print(err)
+        except jwt.PyJWTError:
             raise UnauthorizedException()
         except Exception:
             raise UnauthorizedException()

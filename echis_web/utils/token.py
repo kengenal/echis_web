@@ -27,7 +27,7 @@ def generate_fake_discord_token():
 def create_token(data, exp=50, options=None):
     if options is None:
         options = {}
-    get_secret = options.get("TOKEN_SECRET", "asdasdasd")
+    get_secret = options.get("SECRET_KEY", "asdasdasd")
     get_alg = options.get("TOKEN_ALGORITHM", "HS256")
     debug = options.get("FLASK_DEBUG", 0)
     payload = data
@@ -42,7 +42,7 @@ def create_token(data, exp=50, options=None):
 def decode_token(token, options=None):
     if options is None:
         options = {}
-    get_secret = options.get("TOKEN_SECRET", "asdasdasd")
+    get_secret = options.get("SECRET_KEY", "asdasdasd")
     get_alg = options.get("TOKEN_ALGORITHM", "HS256")
     data = jwt.decode(token, get_secret, algorithms=[get_alg])
     return data
@@ -53,7 +53,7 @@ def token_app_decoder():
     return decode_token(
         token=request.headers.get("Authorization", "").replace("Bearer", "").strip(),
         options={
-            "TOKEN_SECRET": current_app.config["SECRET_KEY"],
+            "SECRET_KEY": current_app.config["SECRET_KEY"],
             "TOKEN_ALGORITHM": current_app.config["TOKEN_ALGORITHM"]
         }
     )

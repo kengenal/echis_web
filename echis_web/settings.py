@@ -41,9 +41,9 @@ class SwaggerConfig:
 
 
 class Config:
-    SECRET_KEY = os.getenv("SECRET_KEY", default="secret key")
+    SECRET_KEY = os.getenv("SECRET_KEY", default="dlfmlsdk,mfl';ksdmflk;sdm")
     TOKEN_SECRET = os.getenv("TOKEN_SECRET", default="asdasdasd")
-    TOKEN_ALGORITHM = os.getenv("TOKEN_ALGORITHM", default="HS256")
+    TOKEN_ALGORITHM = os.getenv("TOKEN_ALGORITHM", default="HS512")
     TOKEN_LIFETIME = os.getenv("TOKEN_LIFETIME", default=1440)
     PAGINATION = 10
     API_AVAILABLE = ["spotify", "deezer", "youtube"]
