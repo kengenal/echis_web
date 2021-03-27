@@ -1,6 +1,7 @@
 from datetime import timedelta, datetime
 
 import jwt
+from flask import request, current_app
 
 from echis_web.settings import DevConfig
 
@@ -43,5 +44,16 @@ def decode_token(token, options=None):
         options = {}
     get_secret = options.get("TOKEN_SECRET", "asdasdasd")
     get_alg = options.get("TOKEN_ALGORITHM", "HS256")
-    data = jwt.decode(bytes(token, encoding="utf8"), get_secret, algorithms=[get_alg])
+    data = jwt.decode(token, get_secret, algorithms=[get_alg])
     return data
+
+
+def token_app_decoder():
+    """ Token decoder use Flask context """
+    return decode_token(
+        token=request.headers.get("Authorization", "").replace("Bearer", "").strip(),
+        options={
+            "TOKEN_SECRET": current_app.config["SECRET_KEY"],
+            "TOKEN_ALGORITHM": current_app.config["TOKEN_ALGORITHM"]
+        }
+    )
