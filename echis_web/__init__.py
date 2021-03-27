@@ -4,14 +4,12 @@ import os
 
 import click
 from flasgger import Swagger
-from flask import Flask, render_template, jsonify
+from flask import Flask, jsonify
 from flask_mongoengine import MongoEngineSessionInterface
 
 from echis_web.controllers.api.api_auth_controller import ApiAuthController, ApiLogoutController
 from echis_web.controllers.api.api_share_controller import ApiPlaylistController, ApiSongController
-from echis_web.controllers.auth_controller import auth
 from echis_web.controllers.home_controller import home
-from echis_web.controllers.share_controller import share
 from echis_web.exception.exceptions import (
     ForbiddenException,
     UnauthorizedException,
@@ -35,9 +33,7 @@ def create_app():
     load_extensions(app, env)
 
     app.session_interface = MongoEngineSessionInterface(me)
-    app.register_blueprint(auth)
     app.register_blueprint(home)
-    app.register_blueprint(share)
     register_exceptions(app)
 
     route(app)
@@ -70,7 +66,7 @@ def load_extensions(app, env):
 
 
 def page_not_found(e):
-    return render_template('404.html'), 404
+    return jsonify({"Error": "page not found"}), 404
 
 
 def load_commands(app):

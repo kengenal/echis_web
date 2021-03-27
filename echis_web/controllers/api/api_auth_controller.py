@@ -25,7 +25,7 @@ def create(public_id):
         data={"public_id": str(public_id)},
         exp=current_app.config["TOKEN_LIFETIME"],
         options={
-            "TOKEN_SECRET": current_app.config["SECRET_KEY"],
+            "SECRET_KEY": current_app.config["SECRET_KEY"],
             "TOKEN_ALGORITHM": current_app.config["TOKEN_ALGORITHM"]
         }
     )
