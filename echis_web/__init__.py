@@ -4,7 +4,6 @@ import os
 from pathlib import Path
 
 import click
-from flasgger import Swagger
 from flask import Flask, jsonify
 
 from echis_web.controllers.api.api_auth_controller import ApiAuthController, ApiLogoutController
@@ -34,7 +33,7 @@ def create_app():
     app = Flask(__name__, static_url_path=static_url, static_folder=path, template_folder=path)
     app.config.from_object(object_name)
     load_extensions(app, env)
-    register_exceptions(app)
+    register_exceptions(app, path)
     route(app)
 
     load_commands(app)
@@ -42,8 +41,13 @@ def create_app():
     return app
 
 
-def register_exceptions(app):
-    app.register_error_handler(404, lambda x: app.send_static_file('index.html'))
+def register_exceptions(app, path=None):
+    app.register_error_handler(
+        404,
+        lambda x: (app.send_static_file('index.html') if os.path.exists(path=path) else jsonify(
+            {"Error": "page not foud"}), 404
+                   )
+    )
     app.register_error_handler(InternalServerException, handle_invalid_usage)
     app.register_error_handler(UnauthorizedException, handle_invalid_usage)
     app.register_error_handler(ForbiddenException, handle_invalid_usage)
@@ -60,6 +64,7 @@ def handle_invalid_usage(error):
 def load_extensions(app, env):
     if env == "develop":
         """ extensions only for development """
+        from flasgger import Swagger
         Swagger(app, template=app.config["SWAGGER_TEMPLATE"], config=app.config["SWAGGER_CONFIG"])
     me.init_app(app)
 
