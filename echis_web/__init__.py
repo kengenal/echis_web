@@ -1,41 +1,40 @@
 #! ../env/bin/python
 # -*- coding: utf-8 -*-
 import os
+from pathlib import Path
 
 import click
 from flasgger import Swagger
 from flask import Flask, jsonify
-from flask_mongoengine import MongoEngineSessionInterface
 
 from echis_web.controllers.api.api_auth_controller import ApiAuthController, ApiLogoutController
 from echis_web.controllers.api.api_share_controller import ApiPlaylistController, ApiSongController
-from echis_web.controllers.home_controller import home
 from echis_web.exception.exceptions import (
     ForbiddenException,
     UnauthorizedException,
     BadRequestException,
-    NotFoundException
+    NotFoundException, InternalServerException
 )
 from echis_web.extensions import me
 from echis_web.utils.token import create_token, generate_fake_discord_token
 
+ROOT_DIR = Path(__file__).resolve(strict=True).parent.parent
+
 
 def create_app():
-    app = Flask(__name__, static_url_path="/webstatic")
     env = os.getenv("FLASK_ENV", default="develop")
     object_name = "echis_web.settings.DevConfig"
+    static_url = '/webstatic'
     if env == "production":
         object_name = "echis_web.settings.ProdConfig"
+        static_url = '/static'
     elif env == "test":
         object_name = "echis_web.settings.TestConfig"
-
+    path = os.path.join(ROOT_DIR / 'client/dist/client')
+    app = Flask(__name__, static_url_path=static_url, static_folder=path, template_folder=path)
     app.config.from_object(object_name)
     load_extensions(app, env)
-
-    app.session_interface = MongoEngineSessionInterface(me)
-    app.register_blueprint(home)
     register_exceptions(app)
-
     route(app)
 
     load_commands(app)
@@ -44,8 +43,8 @@ def create_app():
 
 
 def register_exceptions(app):
-    app.register_error_handler(404, page_not_found)
-    app.register_error_handler(500, page_not_found)
+    app.register_error_handler(404, lambda x: app.send_static_file('index.html'))
+    app.register_error_handler(InternalServerException, handle_invalid_usage)
     app.register_error_handler(UnauthorizedException, handle_invalid_usage)
     app.register_error_handler(ForbiddenException, handle_invalid_usage)
     app.register_error_handler(BadRequestException, handle_invalid_usage)
@@ -63,10 +62,6 @@ def load_extensions(app, env):
         """ extensions only for development """
         Swagger(app, template=app.config["SWAGGER_TEMPLATE"], config=app.config["SWAGGER_CONFIG"])
     me.init_app(app)
-
-
-def page_not_found(e):
-    return jsonify({"Error": "page not found"}), 404
 
 
 def load_commands(app):
