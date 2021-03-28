@@ -17,6 +17,11 @@ class UnauthorizedException(HttpBaseException):
     message = "User not exists"
 
 
+class InternalServerException(HttpBaseException):
+    status_code = 500
+    message = "Internal server error"
+
+
 class ForbiddenException(HttpBaseException):
     status_code = 403
     message = "You don't has permission"
