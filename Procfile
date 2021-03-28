@@ -1,2 +1,2 @@
 
-web: npm run prod && gunicorn echis_web:create_app\(\) -b 0.0.0:8000
+web: gunicorn echis_web:create_app\(\) -w 2 -b 0.0.0.0:$PORT
