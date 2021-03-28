@@ -27,7 +27,7 @@ def create_app():
     static_url = '/webstatic'
     if env == "production":
         object_name = "echis_web.settings.ProdConfig"
-        static_url = '/static'
+        static_url = '/static/'
     elif env == "test":
         object_name = "echis_web.settings.TestConfig"
     path = os.path.join(ROOT_DIR / 'client/dist/client')
