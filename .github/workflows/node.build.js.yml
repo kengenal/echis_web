@@ -25,4 +25,4 @@ jobs:
       - run: npm --prefix client install
       - run: npm run --prefix client build
       - run: git remote add heroku https://heroku:${{ secrets.HEROKU_API_KEY }}@git.heroku.com/${{ secrets.HEROKU_APP_NAME }}.git
-      - run: git push heroku `git subtree split --prefix client master`:master --force
+      - run: git subtree push --prefix client heroku master
