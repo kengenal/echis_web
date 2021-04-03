@@ -27,6 +27,7 @@ jobs:
       - run: git remote add heroku https://heroku:${{ secrets.HEROKU_API_KEY }}@git.heroku.com/${{ secrets.HEROKU_APP_NAME }}.git
       - run: git config --global user.email "deploy@deploy.com"
       - run: git config --global user.name "Deploy bot"
+      - run: git fetch --unshallow
       - run: git add client/dist
       - run: git commit -m'deploy'
       - run: git push heroku master
