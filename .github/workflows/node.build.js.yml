@@ -10,9 +10,6 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
-    defaults:
-      run:
-        working-directory: ./client
     strategy:
       matrix:
         node-version: [14]
@@ -25,7 +22,7 @@ jobs:
         with:
           node-version: ${{ matrix.node-version }}
 
-      - run: npm install
-      - run: npm run build
+      - run: npm --prefix client install
+      - run: npm run --prefix client build
       - run: git remote add heroku https://heroku:${{ secrets.HEROKU_API_KEY }}@git.heroku.com/${{ secrets.HEROKU_APP_NAME }}.git
-      - run: git push heroku `git subtree split --prefix client/dist master`:master --force
+      - run: git push heroku `git subtree split --prefix client master`:master --force
