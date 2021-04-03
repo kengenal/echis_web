@@ -14,7 +14,7 @@ def dec():
     return decode_token(
         token=request.headers.get("Authorization", "").replace("Bearer", "").strip(),
         options={
-            "TOKEN_SECRET": current_app.config["TOKEN_SECRET"],
+            "SECRET_KEY": current_app.config["TOKEN_SECRET"],
             "TOKEN_ALGORITHM": current_app.config["TOKEN_ALGORITHM"]
         }
     )
