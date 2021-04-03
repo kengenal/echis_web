@@ -4,7 +4,7 @@
 name: Node.js CI
 
 on:
-  pull_request:
+  push:
     branches: [master]
 
 jobs:
@@ -27,3 +27,5 @@ jobs:
 
       - run: npm install
       - run: npm run build
+      - run: git remote add heroku https://heroku:${{ secrets.HEROKU_API_KEY }}@git.heroku.com/${{ secrets.HEROKU_APP_NAME }}.git
+      - run: git push --force heroku `git subtree split --prefix client HEAD`:master
