@@ -1,4 +1,4 @@
-Get all playlists
+Get all Words
 ---
 tags:
   - Filter
@@ -18,7 +18,7 @@ definitions:
         items:
           type: object
           properties:
-            pk:
+            _id:
               type: string
             created_at:
               type: string

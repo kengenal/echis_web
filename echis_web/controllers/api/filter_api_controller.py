@@ -16,7 +16,7 @@ class ApiFilterController(MethodView):
         file: docs/filter/get_playlists_items.yaml
         """
         try:
-            filter_items = FilterModel.objects.on.all()
+            filter_items = FilterModel.objects.all()
             return jsonify(filter_items)
         except Exception:
             raise NotFoundException()
@@ -34,10 +34,11 @@ class ApiFilterController(MethodView):
                     raise ValidationError(errors={"words": "Cannot be empty"})
                 created_words = []
                 for name in words:
-                    new_filter = FilterModel(name=name)
-                    new_filter.validate()
-                    new_filter.save()
-                    created_words.append(new_filter)
+                    if not FilterModel.objects(name=name):
+                        new_filter = FilterModel(name=name)
+                        new_filter.validate()
+                        new_filter.save()
+                        created_words.append(new_filter)
                 return jsonify(created_words), 201
             raise ValidationError(errors={"words": "Cannot be empty"})
         except ValidationError as err:

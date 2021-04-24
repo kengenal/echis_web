@@ -19,7 +19,7 @@ def generate_fake_discord_token():
                   "-bohSs7JnQyfoUI_-q7osntUmM2H4LsFUPHOma1TCW2VNZqoG0x8xhmA",
     }
     return create_token(data=prepare_data, options={
-        "TOKEN_SECRET": config.TOKEN_SECRET,
+        "SECRET_KEY": config.TOKEN_SECRET,
         "TOKEN_ALGORITHM": config.TOKEN_ALGORITHM
     })
 
