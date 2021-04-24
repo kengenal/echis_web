@@ -1,0 +1,52 @@
+Create filters
+---
+tags:
+  - Filter
+security:
+  - bearerAuth: [ ]
+parameters:
+  - name: Authorization
+    type: Authorization
+    in: header
+    required: True
+  - name: body
+    in: body
+    required: true
+    schema:
+      properties:
+        words:
+          type: array
+          items:
+            type: string
+responses:
+  201:
+    description: "Words has been created"
+    schema:
+      properties:
+        schema:
+          type: array
+          items:
+            type: object
+            properties:
+              id:
+                type: string
+              name:
+                type: string
+              created_at:
+                type: string
+                format: date-time
+  401:
+    description: "Missing token"
+    schema:
+      properties:
+        message:
+          type: string
+          default: "User not exists"
+  400:
+    description: "Cannot be empty"
+    schema:
+      properties:
+        words:
+          type: string
+          description: "Cannot be empty"
+

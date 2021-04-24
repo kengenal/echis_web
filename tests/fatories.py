@@ -1,9 +1,11 @@
 import random
 import uuid
+from datetime import datetime
 
 import factory
 from factory import Faker
 
+from echis_web.model.filter_model import FilterModel
 from echis_web.model.share_model import Playlists, SharedSongs
 from echis_web.model.user_model import User
 
@@ -50,3 +52,11 @@ class UserFactory(factory.mongoengine.MongoEngineFactory):
                   "-cwgvqwoA5lHC2cQ5ISonuVK7KXjmWYRYjusSp2g4HVqiCWpjhE3Qp0OoXXCN5VnLh7PEjajbpS74Ez428mIX9dPJ6azi37sw")
 
     permissions = ["ADMIN"]
+
+
+class FilterFactory(factory.mongoengine.MongoEngineFactory):
+    class Meta:
+        model = FilterModel
+
+    name = Faker("name")
+    created_at = factory.Sequence(lambda n: datetime.utcnow)

@@ -8,6 +8,7 @@ from flask import Flask, jsonify
 
 from echis_web.controllers.api.api_auth_controller import ApiAuthController, ApiLogoutController
 from echis_web.controllers.api.api_share_controller import ApiPlaylistController, ApiSongController
+from echis_web.controllers.api.filter_api_controller import ApiFilterController
 from echis_web.exception.exceptions import (
     ForbiddenException,
     UnauthorizedException,
@@ -111,6 +112,12 @@ def route(app):
         view_func=ApiSongController.as_view("share_songs_parameter"),
         methods=["DELETE"]
     )
+
+    # FILTER
+    app.add_url_rule("/api/filter/words", view_func=ApiFilterController.as_view("filter_module"),
+                     methods=["GET", "POST"])
+    app.add_url_rule("/api/filter/words/<string:word_id>", view_func=ApiFilterController.as_view("filter_module_remove"),
+                     methods=["DELETE"])
 
 
 @click.command("login")

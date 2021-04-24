@@ -1,0 +1,27 @@
+Delete words
+---
+tags:
+  - Filter
+security:
+  - bearerAuth: [ ]
+parameters:
+  - name: Authorization
+    type: Authorization
+    in: header
+    required: True
+  - in: path
+    name: pk
+    type: string
+    required: true
+responses:
+  204:
+    description: "Playlist has been removed"
+  401:
+    description: "Missing token"
+    schema:
+      properties:
+        message:
+          type: string
+          default: "User not exists"
+  404:
+    description: "Words not found"
