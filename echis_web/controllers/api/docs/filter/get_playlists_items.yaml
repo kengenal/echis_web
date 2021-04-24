@@ -1,0 +1,42 @@
+Get all playlists
+---
+tags:
+  - Filter
+security:
+  - bearerAuth: [ ]
+parameters:
+  - name: Authorization
+    type: Authorization
+    in: header
+    required: True
+definitions:
+  Words:
+    type: object
+    properties:
+      words:
+        type: array
+        items:
+          type: object
+          properties:
+            pk:
+              type: string
+            created_at:
+              type: string
+              format: date-time
+            name:
+              type: string
+responses:
+  200:
+    description: "Response words object"
+    schema:
+      $ref: '#/definitions/Words'
+  401:
+    description: "Missing token"
+    schema:
+      properties:
+        message:
+          type: string
+          default: "User not exists"
+  404:
+    description: "Not found"
+

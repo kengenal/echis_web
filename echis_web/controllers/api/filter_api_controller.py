@@ -13,10 +13,10 @@ class ApiFilterController(MethodView):
     @staticmethod
     def get():
         """
-        file: docs/playlists/get_playlists_items.yaml
+        file: docs/filter/get_playlists_items.yaml
         """
         try:
-            filter_items = FilterModel.objects.all()
+            filter_items = FilterModel.objects.on.all()
             return jsonify(filter_items)
         except Exception:
             raise NotFoundException()
@@ -24,7 +24,7 @@ class ApiFilterController(MethodView):
     @staticmethod
     def post():
         """
-        file: docs/playlists/create_item.yaml
+        file: docs/filter/create_item.yaml
         """
         rq = request.get_json()
         try:
@@ -49,9 +49,12 @@ class ApiFilterController(MethodView):
 
     @staticmethod
     def delete(word_id):
+        """
+        file: docs/filter/delete_item.yaml
+        """
         try:
             playlist = FilterModel.objects.get_or_404(pk=word_id)
             playlist.delete()
-            return jsonify({"Error": "Playlist has been removed"}), 204
+            return jsonify({"Success": "Playlist has been removed"}), 204
         except Exception:
             raise NotFoundException()
