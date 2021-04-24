@@ -25,7 +25,6 @@ class TestApiController(BaseTokenSetup):
         }
 
         rq = self.client.post("/api/share/playlist", json=payload, headers=self.auth_header)
-        print(rq.data)
         assert rq.status_code == 201
         assert b"playlist_id" in rq.data
 
