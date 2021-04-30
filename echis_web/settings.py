@@ -46,7 +46,7 @@ class Config:
     TOKEN_ALGORITHM = os.getenv("TOKEN_ALGORITHM", default="HS256")
     TOKEN_LIFETIME = os.getenv("TOKEN_LIFETIME", default=1440)
     PAGINATION = 10
-    API_AVAILABLE = ["spotify", "deezer", "youtube"]
+    API_AVAILABLE = ["spotify", "deezer", "youtube", "apple_music"]
 
 
 class ProdConfig(Config):
