@@ -3,7 +3,7 @@ from datetime import datetime
 
 from echis_web.extensions import me
 
-SHARE_APIS = [("deezer", "deezer"), ("spotify", "spotify"), ("youtube", "youtube")]
+SHARE_APIS = [("deezer", "deezer"), ("spotify", "spotify"), ("youtube", "youtube"), ("apple_music", "apple_music")]
 
 
 class SharedSongs(me.Document):
