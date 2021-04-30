@@ -2,7 +2,6 @@
 # -*- coding: utf-8 -*-
 import os
 from pathlib import Path
-
 from flask import Flask, jsonify
 
 from echis_web.controllers.api.api_auth_controller import ApiAuthController, ApiLogoutController
@@ -71,7 +70,9 @@ def load_extensions(app, env):
 
 
 def load_commands(app):
-    pass
+    from echis_web.commands import import_words_from_csv_command
+
+    app.cli.add_command(import_words_from_csv_command)
 
 
 def route(app):
@@ -116,7 +117,8 @@ def route(app):
     # FILTERApiPlaylistController
     app.add_url_rule("/api/filter/words", view_func=ApiFilterController.as_view("filter_module"),
                      methods=["GET", "POST"])
-    app.add_url_rule("/api/filter/words/<string:word_id>", view_func=ApiFilterController.as_view("filter_module_remove"),
+    app.add_url_rule("/api/filter/words/<string:word_id>",
+                     view_func=ApiFilterController.as_view("filter_module_remove"),
                      methods=["DELETE"])
 
     # weather
