@@ -51,4 +51,4 @@ class TestApiWeatherController(BaseTokenSetup):
         rq = self.client.get("/api/weather", headers=self.auth_header)
 
         assert rq.status_code == 400
-        assert b'{\n  "Error": "City not exists"\n}\n' in rq.data
+        assert b'{\n  "error": "City not exists"\n}\n' in rq.data

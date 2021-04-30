@@ -17,17 +17,17 @@ class ApiWeatherController(MethodView):
 
     def get(self, city=None):
         """
-        file: docs/playlists/get_playlists_items.yaml
+        file: docs/weather/get_items.yaml
         """
         self.city = Localization(city=city, country="")
         token = os.getenv("OPEN_WEATHER_TOKEN")
         if not token:
-            return jsonify({"Error": "api is unavailable"}), 404
+            return jsonify({"error": "api is unavailable"}), 404
         if not self.city:
             self._set_city()
         self._get_weather(token)
         if not self.weather:
-            return jsonify({"Error": "City not exists"}), 400
+            return jsonify({"error": "City not exists"}), 400
         return jsonify(self.weather), 200
 
     def _set_city(self):

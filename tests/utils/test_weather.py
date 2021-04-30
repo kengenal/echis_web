@@ -41,12 +41,18 @@ class MockWeatherData:
             "base": "stations",
             "main": {
                 "temp": 9.31, "feels_like": 6.67, "temp_min": 7.78, "temp_max": 11.11, "pressure": 1019,
-                "humidity": 39}, "visibility": 10000, "wind": {"speed": 5.14, "deg": 310},
-            "clouds": {"all": 0}, "dt": 1619354763,
+                "humidity": 39},
+            "visibility": 10000,
+            "wind": {"speed": 5.14, "deg": 310},
+            "clouds": {"all": 0},
+            "dt": 1619354763,
             "sys": {
                 "type": 1, "id": 1713, "country": "PL", "sunrise": 1619320630, "sunset": 1619373019
             },
-            "timezone": 7200, "id": 756135, "name": "Warsaw", "cod": 200
+            "timezone": 7200,
+            "id": 756135,
+            "name": "Warsaw",
+            "cod": 200
         }
 
 
