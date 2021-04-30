@@ -43,7 +43,7 @@ class TestApiWeatherController(BaseTokenSetup):
         rq = self.client.get("/api/weather/warsaw", headers=self.auth_header)
 
         assert rq.status_code == 400
-        assert b'{\n  "Error": "City not exists"\n}\n' in rq.data
+        assert b'{\n  "error": "City not exists"\n}\n' in rq.data
 
     def test_get_empty_localization_should_be_return_400_with_error(self, monkeypatch):
         monkeypatch.setattr(Weather, "_request", mock_bad_requests)

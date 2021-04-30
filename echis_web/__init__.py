@@ -3,13 +3,12 @@
 import os
 from pathlib import Path
 
-import click
 from flask import Flask, jsonify
 
 from echis_web.controllers.api.api_auth_controller import ApiAuthController, ApiLogoutController
 from echis_web.controllers.api.api_share_controller import ApiPlaylistController, ApiSongController
 from echis_web.controllers.api.api_weather_controller import ApiWeatherController
-from echis_web.controllers.api.filter_api_controller import ApiFilterController
+from echis_web.controllers.api.api_filter_controller import ApiFilterController
 from echis_web.exception.exceptions import (
     ForbiddenException,
     UnauthorizedException,
@@ -46,7 +45,7 @@ def create_app():
 def register_exceptions(app, path=None):
     app.register_error_handler(
         404,
-        lambda x: (app.send_static_file('index.html') if os.path.exists(path=path) else jsonify(
+        lambda x: (app.send_static_file("index.html") if os.path.exists(path=path) else jsonify(
             {"Error": "page not foud"}), 404
                    )
     )
@@ -72,7 +71,7 @@ def load_extensions(app, env):
 
 
 def load_commands(app):
-    app.cli.add_command(login_command)
+    pass
 
 
 def route(app):
@@ -128,8 +127,3 @@ def route(app):
                      methods=["GET"])
 
 
-@click.command("login")
-def login_command():
-    """ create token to login with dami data """
-    token = generate_fake_discord_token()
-    click.echo(f"http://discord.docker.localhost:5000/api/auth/{token}")
