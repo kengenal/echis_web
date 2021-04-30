@@ -23,7 +23,10 @@ def import_words_from_csv_command(file_name):
             csv_reader = csv.reader(csv_file, delimiter=',')
             for row in csv_reader:
                 for i in row:
-                    if not FilterModel.objects(name=i.strip()):
-                        FilterModel(name=i).save()
-    except Exception:
-        raise Exception("Something goes wrong")
+                    if not FilterModel.objects(name=i.strip()).count():
+                        fil = FilterModel(name=i.strip())
+                        fil.save()
+                        print(f"Word '{i}' has been added")
+        click.echo("Success, words has been imported")
+    except Exception as e:
+        raise Exception(e)
