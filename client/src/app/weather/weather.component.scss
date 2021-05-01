@@ -1,0 +1,39 @@
+@import "../../style/global.scss";
+
+.form-btn {
+  margin-left: 0;
+  margin-top: 20px;
+}
+
+.card {
+  &__header {
+    text-align: center;
+    color: darken(#fff, 40);
+  }
+
+  &__list {
+    list-style: none;
+    padding: 0;
+  }
+
+  &__list-item {
+    margin-top: 10px;
+    border-top: 1px solid darken(#fff, 40);
+    padding-top: 10px;
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+
+    &:hover {
+      color: $primary-color;
+    }
+  }
+
+  &__list-label {
+    padding: 0.5rem;
+    color: darken(#fff, 40);
+  }
+  &__list-txt {
+    color: darken(#fff, 20);
+  }
+}

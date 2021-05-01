@@ -1,0 +1,67 @@
+<div class="container">
+  <div class="container__header">
+    <h1>Weather</h1>
+  </div>
+
+  <form (submit)="onCityChange($event)">
+    <div class="p-field p-grid">
+      <label for="city" class="p-col-fixed" style="width: 100px; color: #fff">City</label>
+      <div class="p-col">
+        <input id="city" name="city" type="text" pInputText [(ngModel)]="city" />
+        <div style="color: #fff">Location: {{ weatherData.name }}, {{ weatherData.sys.country }}</div>
+      </div>
+      <div class="p-col">
+        <button class="form-btn" pButton type="submit" label="Select"></button>
+      </div>
+    </div>
+  </form>
+
+  <div class="card">
+    <h2 class="card__header">Main</h2>
+    <ul class="card__list">
+      <li class="card__list-item">
+        <strong class="card__list-label">Humidity:</strong>
+        <span class="card__list-txt">{{ weatherData.main.humidity }}</span>
+      </li>
+
+      <li class="card__list-item">
+        <strong class="card__list-label">Pressure:</strong>
+        <span class="card__list-txt">{{ weatherData.main.pressure }}</span>
+      </li>
+
+      <li class="card__list-item">
+        <strong class="card__list-label">Min temperature:</strong>
+        <span class="card__list-txt"> {{ weatherData.main.temp_min }} </span>
+      </li>
+
+      <li class="card__list-item">
+        <strong class="card__list-label">Max temperature:</strong>
+        <span class="card__list-txt"> {{ weatherData.main.temp_max }} </span>
+      </li>
+    </ul>
+  </div>
+
+  <div class="card">
+    <h2 class="card__header">Weather</h2>
+    <ul class="card__list">
+      <li class="card__list-item" *ngFor="let weather of weatherData.weather">
+        <strong class="card__list-label">Description:</strong>
+        <span class="card__list-txt">{{ weather.description }}</span>
+      </li>
+    </ul>
+  </div>
+
+  <div class="card">
+    <h2 class="card__header">Wind</h2>
+    <ul class="card__list">
+      <li class="card__list-item">
+        <strong class="card__list-label">Deg:</strong>
+        <span class="card__list-txt">{{ weatherData.wind.deg }}</span>
+      </li>
+      <li class="card__list-item">
+        <strong class="card__list-label">Speed:</strong>
+        <span class="card__list-txt">{{ weatherData.wind.speed }}</span>
+      </li>
+    </ul>
+  </div>
+</div>
