@@ -16,6 +16,10 @@ const routes: Routes = [
     path: 'share',
     loadChildren: './share/share.module#ShareModule',
   },
+  {
+    path: 'weather',
+    loadChildren: './weather/weather.module#WeatherModule',
+  },
   { path: '**', redirectTo: '/404' },
   { path: '404', component: NotFoundComponent },
 ];

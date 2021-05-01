@@ -30,6 +30,10 @@ export class NavbarComponent implements OnInit {
           },
         ],
       },
+      {
+        label: 'Weather',
+        routerLink: '/weather',
+      },
     ];
   }
 

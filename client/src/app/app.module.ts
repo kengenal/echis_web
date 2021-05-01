@@ -6,10 +6,11 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { NotFoundComponent } from './not-found/not-found.component';
+import { WeatherModule } from './weather/weather.module';
 
 @NgModule({
   declarations: [AppComponent, NotFoundComponent],
-  imports: [BrowserAnimationsModule, AppRoutingModule, HomeModule, NavbarModule, ShareModule],
+  imports: [BrowserAnimationsModule, AppRoutingModule, HomeModule, NavbarModule, ShareModule, WeatherModule],
   providers: [],
   bootstrap: [AppComponent],
 })
