@@ -1,0 +1,4 @@
+FLASK_ENV=develop
+FLASK_APP=main.py
+FLASK_DEBUG=1
+MONGO_URL=mongodb://root:example@mongo:27017/admin
