@@ -62,7 +62,7 @@ class DevConfig(Config, SwaggerConfig):
 
     MONGODB_SETTINGS = {
         "db": "admin",
-        "host": "mongodb://root:example@mongo:27017/admin"
+        "host": os.getenv("MONGO_URL")
     }
 
 

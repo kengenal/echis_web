@@ -9,7 +9,7 @@ from echis_web.utils.decorators import login_required_api, has_perm_api
 
 class ApiPlaylistController(MethodView):
     has_perm_for_methods = ["POST", "PUT", "DELETE"]
-    decorators = [has_perm_api(permissions=["ADMIN"], methods=has_perm_for_methods), login_required_api]
+    decorators = [has_perm_api(permissions=["SHARE"], methods=has_perm_for_methods), login_required_api]
 
     def get(self, page=1):
         """

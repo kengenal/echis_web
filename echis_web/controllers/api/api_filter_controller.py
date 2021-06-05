@@ -8,7 +8,7 @@ from mongoengine import ValidationError, NotUniqueError
 
 class ApiFilterController(MethodView):
     has_perm_for_methods = ["POST", "PUT", "DELETE"]
-    decorators = [has_perm_api(permissions=["ADMIN"], methods=has_perm_for_methods), login_required_api]
+    decorators = [has_perm_api(permissions=["SHARE"], methods=has_perm_for_methods), login_required_api]
 
     @staticmethod
     def get():
